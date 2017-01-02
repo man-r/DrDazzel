@@ -6,6 +6,23 @@
   <script src="./js/jquery-1.11.3.min.js"></script>
   <script src="./js/jquery.mobile-1.4.5.min.js"></script>
 </head>
+<script>
+
+function Next(){
+ var json = {
+  "CarMake":  document.getElementById("CarMake").value ,
+  "Year":  document.getElementById("Year").value ,
+  "CarModel":  document.getElementById("CarModel").value ,
+  "CarSize":  document.getElementById("CarSize").value ,
+ }
+
+ localStorage.setItem("json", JSON.stringify(json));
+  window.location.href = "Page4.html";
+
+
+}
+
+</script>
 <style>
   body{
 
@@ -50,7 +67,7 @@ color: white;
     <form method="post" action="demoform.asp">
       <fieldset class="ui-field-contain">
 
-        <select name="day" id="day">
+        <select name="day" id="CarMake">
           <option value="mon">Select Make</option>
           <option value="tue">Tuesday</option>
           <option value="wed">Wednesday</option>
@@ -68,7 +85,7 @@ color: white;
   <form method="post" action="demoform.asp">
     <fieldset class="ui-field-contain">
 
-      <select name="day" id="day">
+      <select name="day" id="Year">
         <option value="mon">Select Year</option>
         <option value="tue">Tuesday</option>
         <option value="wed">Wednesday</option>
@@ -87,7 +104,7 @@ color: white;
   <form method="post" action="demoform.asp">
     <fieldset class="ui-field-contain">
 
-      <select name="day" id="day">
+      <select name="day" id="CarModel">
         <option value="mon">Select Model</option>
         <option value="tue">Tuesday</option>
         <option value="wed">Wednesday</option>
@@ -106,7 +123,7 @@ color: white;
   <form method="post" action="demoform.asp">
     <fieldset class="ui-field-contain">
 
-      <select name="day" id="day">
+      <select name="day" id="CarSize">
         <option value="mon">Size Of The Car </option>
         <option value="tue">Tuesday</option>
         <option value="wed">Wednesday</option>
@@ -122,7 +139,7 @@ color: white;
 </div>
 
 
-<div id="NextButton">
+<div id="NextButton" onclick="Next()">
 <h1 id="whitetxt">NEXT STEP</h1>
 </div>
 </body>

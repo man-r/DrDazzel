@@ -6,6 +6,33 @@
   <script src="./js/jquery-1.11.3.min.js"></script>
   <script src="./js/jquery.mobile-1.4.5.min.js"></script>
 </head>
+
+<script>
+
+
+
+var json
+function Next(){
+json = JSON.parse(localStorage.getItem("json"));
+console.log(json.CarMake);
+console.log(json.Year);
+console.log(json.CarModel);
+console.log(json.CarSize);
+  json2 = {
+  "service1":  document.getElementById("service1").value ,
+  "service2":  document.getElementById("service2").value ,
+  "service3":  document.getElementById("service3").value ,
+  "service4":  document.getElementById("service4").value ,
+ }
+ localStorage.setItem("json", JSON.stringify(json2));
+
+ window.location.href = "Page5.html";
+
+
+}
+
+</script>
+
 <style>
   body{
 
@@ -39,7 +66,7 @@ color: white;
 </style>
 <body>
   <div id="PageHeader">
-  <h1 id="whitetxt">what you drive?</h1>
+  <h1 id="whitetxt">Select Services</h1>
 </div>
 
 <div>
@@ -47,8 +74,8 @@ color: white;
     <form method="post" action="demoform.asp">
       <fieldset class="ui-field-contain">
 
-        <select name="day" id="day">
-          <option value="mon">Select Make</option>
+        <select name="day" id="service1">
+          <option value="mon">Select service 1</option>
           <option value="tue">Tuesday</option>
           <option value="wed">Wednesday</option>
           <option value="thu">Thursday</option>
@@ -65,8 +92,8 @@ color: white;
   <form method="post" action="demoform.asp">
     <fieldset class="ui-field-contain">
 
-      <select name="day" id="day">
-        <option value="mon">Select Year</option>
+      <select name="day" id="service2">
+        <option value="mon">Select service 2</option>
         <option value="tue">Tuesday</option>
         <option value="wed">Wednesday</option>
         <option value="thu">Thursday</option>
@@ -84,8 +111,8 @@ color: white;
   <form method="post" action="demoform.asp">
     <fieldset class="ui-field-contain">
 
-      <select name="day" id="day">
-        <option value="mon">Select Model</option>
+      <select name="day" id="service3">
+        <option value="mon">Select service 3</option>
         <option value="tue">Tuesday</option>
         <option value="wed">Wednesday</option>
         <option value="thu">Thursday</option>
@@ -103,8 +130,8 @@ color: white;
   <form method="post" action="demoform.asp">
     <fieldset class="ui-field-contain">
 
-      <select name="day" id="day">
-        <option value="mon">Size Of The Car </option>
+      <select name="day" id="service4">
+        <option value="mon">select service 4</option>
         <option value="tue">Tuesday</option>
         <option value="wed">Wednesday</option>
         <option value="thu">Thursday</option>
@@ -119,7 +146,7 @@ color: white;
 </div>
 
 
-<div id="NextButton">
+<div id="NextButton" onclick="Next()">
 <h1 id="whitetxt">NEXT STEP</h1>
 </div>
 </body>
