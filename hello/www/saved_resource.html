@@ -93,7 +93,7 @@ button.mybtn {
 
   </style>
 
-  <title> by jtbowden</title>
+  <title>DrDazzle</title>
 
 
 
@@ -102,6 +102,24 @@ button.mybtn {
 
 
 <script type="text/javascript">//<![CDATA[
+
+  function StoreJson(){
+
+    var json = {
+     "CarMake":  document.getElementById("CarMake").value ,
+     "Year":  document.getElementById("Year").value ,
+     "CarModel":  document.getElementById("CarModel").value ,
+     "CarSize":  document.getElementById("CarSize").value ,
+     "service1":  document.getElementById("service1").value ,
+     "service2":  document.getElementById("service2").value ,
+     "service3":  document.getElementById("service3").value ,
+     "service4":  document.getElementById("service4").value ,
+    }
+
+    console.log(json)
+}
+
+
 $(window).load(function(){
   var i = 1;
 $('#Next').click(function() {
@@ -315,7 +333,21 @@ $('#Next').click(function() {
 
 
 
-<div id="box3" class="box" style="left: 150%;">Div #3</div>
+<div id="box3" class="box" style="left: 150%;">
+
+<!--
+  <p id="CarMake"> Car Make + json.CarMake </p>
+  <p id="Year"> Year +  json.Year      </p>
+  <p id="CarModel">Car Model+json.CarModel </p>
+  <p id="CarSize">Car Size + json.CarSize </p>
+  <p id="service1">service1 +json.service1 </p>
+  <p id="service2">service2 + json.service2</p>
+  <p id="service3">service3 + json.service3</p>
+  <p id="service4">service4 + json.service4</p>
+
+-->
+
+</div>
 
 
 
@@ -342,7 +374,7 @@ $('#Next').click(function() {
 <div class="btndiv">
 
 <button class="mybtn" id="Previous">Previous</button>
-<button class="mybtn" id="Next">Next</button>
+<button class="mybtn" id="Next" onclick="StoreJson()">Next</button>
 
 
 </div>
