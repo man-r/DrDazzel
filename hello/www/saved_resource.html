@@ -10,7 +10,8 @@
   <script src="./js/jquery-1.11.3.min.js"></script>
   <script src="./js/jquery.mobile-1.4.5.min.js"></script>
   <script type="text/javascript" src="./jquery-1.4.4.min.js"></script>
-
+  <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>    
 
 
 
@@ -115,6 +116,68 @@ button.mybtn {
     console.log(json)
 }
 
+function populate() {
+  $(document).ready(
+    function()
+    {
+
+       //Create a variable for the CarQuery object.  You can call it whatever you like.
+       var carquery = new CarQuery();
+
+       //Run the carquery init function to get things started:
+       carquery.init();
+       
+       //Optional: initialize the year, make, model, and trim drop downs by providing their element IDs
+       carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
+
+       //Optional: set the onclick event for a button to show car data.
+       $('#cq-show-data').click(  function(){ carquery.populateCarData('car-model-data'); } );
+
+       //Optional: initialize the make, model, trim lists by providing their element IDs.
+       carquery.initMakeModelTrimList('make-list', 'model-list', 'trim-list', 'trim-data-list');
+
+       //Optional: set minimum and/or maximum year options.
+       carquery.year_select_min=1900;
+       carquery.year_select_max=2017;
+   
+       //Optional: initialize search interface elements.
+       //The IDs provided below are the IDs of the text and select inputs that will be used to set the search criteria.
+       //All values are optional, and will be set to the default values provided below if not specified.
+       var searchArgs =
+       ({
+           body_id:                       "cq-body"
+          ,default_search_text:           "Keyword Search"
+          ,doors_id:                      "cq-doors"
+          ,drive_id:                      "cq-drive"
+          ,engine_position_id:            "cq-engine-position"
+          ,engine_type_id:                "cq-engine-type"
+          ,fuel_type_id:                  "cq-fuel-type"
+          ,min_cylinders_id:              "cq-min-cylinders"
+          ,min_mpg_hwy_id:                "cq-min-mpg-hwy"
+          ,min_power_id:                  "cq-min-power"
+          ,min_top_speed_id:              "cq-min-top-speed"
+          ,min_torque_id:                 "cq-min-torque"
+          ,min_weight_id:                 "cq-min-weight"
+          ,min_year_id:                   "cq-min-year"
+          ,max_cylinders_id:              "cq-max-cylinders"
+          ,max_mpg_hwy_id:                "cq-max-mpg-hwy"
+          ,max_power_id:                  "cq-max-power"
+          ,max_top_speed_id:              "cq-max-top-speed"
+          ,max_weight_id:                 "cq-max-weight"
+          ,max_year_id:                   "cq-max-year"
+          ,search_controls_id:            "cq-search-controls"
+          ,search_input_id:               "cq-search-input"
+          ,search_results_id:             "cq-search-results"
+          ,search_result_id:              "cq-search-result"
+          ,seats_id:                      "cq-seats"
+          ,sold_in_us_id:                 "cq-sold-in-us"
+       }); 
+       carquery.initSearchInterface(searchArgs);
+
+       //If creating a search interface, set onclick event for the search button.  Make sure the ID used matches your search button ID.
+       $('#cq-search-btn').click( function(){ carquery.search(); } );
+  });
+}
 
 $(window).load(function(){
   var i = 1;
@@ -151,7 +214,7 @@ $('#Next').click(function() {
 
 </head>
 
-<body>
+<body onload="populate()">
   <div id="container">
 
 
@@ -165,15 +228,8 @@ $('#Next').click(function() {
     <div data-role="main" class="ui-content">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
-
-          <select name="day" id="CarMake">
-            <option value="mon">Select Make</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
+          <select name="car-years" id="car-years">
+            <option value="">Select year</option>
           </select>
         </fieldset>
       </form>
@@ -183,14 +239,8 @@ $('#Next').click(function() {
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
 
-          <select name="day" id="Year">
-            <option value="mon">Select Year</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
+          <select name="car-makes" id="car-makes">
+            <option value="mon">Select make</option>
           </select>
         </fieldset>
       </form>
@@ -200,35 +250,23 @@ $('#Next').click(function() {
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
 
-          <select name="day" id="CarModel">
+          <select name="car-models" id="car-models">
             <option value="mon">Select Model</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
           </select>
         </fieldset>
       </form>
     </div>
 
-    <div data-role="main" class="ui-content">
+    <!-- <div data-role="main" class="ui-content">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
 
-          <select name="day" id="CarSize">
-            <option value="mon">Size Of The Car </option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
+          <select name="car-model-trims" id="car-model-trims">
+            <option value="mon">Size trim </option>
           </select>
         </fieldset>
       </form>
-    </div>
+    </div> -->
 
 
 
