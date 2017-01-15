@@ -274,13 +274,14 @@ function populate() {
 $(window).load(function(){
   var i = 1;
 $('#Next').click(function() {
+if(i<3){
 
     $("#box"+i).animate({
         left: '-50%'
     }, 500, function() {
         $("#box"+i).css('left', '150%');
         $("#box"+i).appendTo('#container');
-        if(i == 5){
+        if(i == 3){
 
          i = 1;
 
@@ -294,6 +295,14 @@ $('#Next').click(function() {
     $("#box"+i).next().animate({
         left: '50%'
     }, 500);
+
+    if(i == 2) {
+
+    document.getElementById("Next").innerHTML = "Send";
+
+    }
+}
+
 
 
 });
@@ -532,7 +541,7 @@ $('#Next').click(function() {
 
             <tr class="heading">
                 <td>
-                    Item
+                    Service
                 </td>
 
                 <td>
@@ -592,12 +601,12 @@ $('#Next').click(function() {
 
 
 
-<div id="box4" class="box" style="left: 150%;">Div #4</div>
+<!--<div id="box4" class="box" style="left: 150%;">Div #4</div>
 
 
 
 
-<div id="box5" class="box" style="left: 150%;">Div #5</div></div>
+<div id="box5" class="box" style="left: 150%;">Div #5</div></div>-->
 
 
   <script>
