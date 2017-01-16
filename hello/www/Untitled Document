@@ -1,0 +1,73 @@
+<div data-role="main" class="ui-content">
+      <form method="post" action="demoform.asp">
+        <fieldset class="ui-field-contain">
+
+          <select name="day" id="service1">
+            <option value="mon">Select service 1</option>
+            <option value="tue">Tuesday</option>
+            <option value="wed">Wednesday</option>
+            <option value="thu">Thursday</option>
+            <option value="fri">Friday</option>
+            <option value="sat">Saturday</option>
+            <option value="sun">Sunday</option>
+          </select>
+        </fieldset>
+      </form>
+    </div>
+
+
+    <div data-role="main" class="ui-content">
+      <form method="post" action="demoform.asp">
+        <fieldset class="ui-field-contain">
+
+          <select name="day" id="service2">
+            <option value="mon">Select service 2</option>
+            <option value="tue">Tuesday</option>
+            <option value="wed">Wednesday</option>
+            <option value="thu">Thursday</option>
+            <option value="fri">Friday</option>
+            <option value="sat">Saturday</option>
+            <option value="sun">Sunday</option>
+          </select>
+        </fieldset>
+      </form>
+    </div>
+
+
+
+    <div data-role="main" class="ui-content">
+      <form method="post" action="demoform.asp">
+        <fieldset class="ui-field-contain">
+
+          <select name="day" id="service3">
+            <option value="mon">Select service 3</option>
+            <option value="tue">Tuesday</option>
+            <option value="wed">Wednesday</option>
+            <option value="thu">Thursday</option>
+            <option value="fri">Friday</option>
+            <option value="sat">Saturday</option>
+            <option value="sun">Sunday</option>
+          </select>
+        </fieldset>
+      </form>
+    </div>
+
+
+
+    <div data-role="main" class="ui-content">
+      <form method="post" action="demoform.asp">
+        <fieldset class="ui-field-contain">
+
+          <select name="day" id="service4">
+            <option value="mon">select service 4</option>
+            <option value="tue">Tuesday</option>
+            <option value="wed">Wednesday</option>
+            <option value="thu">Thursday</option>
+            <option value="fri">Friday</option>
+            <option value="sat">Saturday</option>
+            <option value="sun">Sunday</option>
+          </select>
+        </fieldset>
+      </form>
+    </div>
+
