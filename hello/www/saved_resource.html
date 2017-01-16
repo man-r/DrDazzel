@@ -10,8 +10,12 @@
   <script src="./js/jquery-1.11.3.min.js"></script>
   <script src="./js/jquery.mobile-1.4.5.min.js"></script>
   <script type="text/javascript" src="./jquery-1.4.4.min.js"></script>
-  <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script>
+
+  <script type="text/javascript"  src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
+
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="CSS/bootstrap.css">
 
 
@@ -27,6 +31,20 @@
 
 
   <style type="text/css">
+
+  .check
+{
+opacity:0.5;
+color:#996;
+
+}
+
+.img-check , .imgbttn{
+
+width: 100%;
+padding: 0px;
+}
+
     body {
     padding: 0px;
 }
@@ -47,6 +65,7 @@ button.mybtn {
   position: absolute;
   width: 100%;
   bottom: -5px;
+  z-index: 15;
 }
 .invoice-box{
         max-width:800px;
@@ -165,6 +184,7 @@ text-align: center;
 
 #box2 {
     background-color: #e8e8e8;
+    overflow: scroll;
 }
 
 #box3 {
@@ -207,6 +227,14 @@ text-align: center;
     document.getElementById("Car-model-invoice").innerHTML = jsonStr.CarModel;
 
 }
+
+$(document).ready(function() {
+  $("#fimg").click(function(){
+    alert("dfkjg");
+  $(this).toggleClass("check");
+});
+});
+
 
 function populate() {
   $(document).ready(
@@ -385,79 +413,20 @@ if(i<3){
 
   <div id="box2form">
 
-    <div data-role="main" class="ui-content">
-      <form method="post" action="demoform.asp">
-        <fieldset class="ui-field-contain">
-
-          <select name="day" id="service1">
-            <option value="mon">Select service 1</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
-          </select>
-        </fieldset>
-      </form>
+    <div class="container">
+    	<div class="row">
+    		<form method="get">
+    		<div class="form-group">
+    		<div class="col-md-3"><label id="fimg" class="btn imgbttn"><img  src="./img/CarShine.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off"></label></div>
+    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/car-interior-cleaning.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk2" id="item4" value="val2" class="hidden" autocomplete="off"></label></div>
+    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/engineClean.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="item4" value="val3" class="hidden" autocomplete="off"></label></div>
+    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="item4" value="val4" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="item4" value="val3" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="item4" value="val4" class="hidden" autocomplete="off"></label></div>
+        </div>
+    		</form>
+    	</div>
     </div>
-
-
-    <div data-role="main" class="ui-content">
-      <form method="post" action="demoform.asp">
-        <fieldset class="ui-field-contain">
-
-          <select name="day" id="service2">
-            <option value="mon">Select service 2</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
-          </select>
-        </fieldset>
-      </form>
-    </div>
-
-
-
-    <div data-role="main" class="ui-content">
-      <form method="post" action="demoform.asp">
-        <fieldset class="ui-field-contain">
-
-          <select name="day" id="service3">
-            <option value="mon">Select service 3</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
-          </select>
-        </fieldset>
-      </form>
-    </div>
-
-
-
-    <div data-role="main" class="ui-content">
-      <form method="post" action="demoform.asp">
-        <fieldset class="ui-field-contain">
-
-          <select name="day" id="service4">
-            <option value="mon">select service 4</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
-          </select>
-        </fieldset>
-      </form>
-    </div>
-
 
   </div>
   </div>
@@ -618,6 +587,7 @@ if(i<3){
     }], "*")
   }
 </script>
+
 
 <div class="btndiv">
 
