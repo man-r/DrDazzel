@@ -214,10 +214,7 @@ text-align: center;
      "Year":  document.getElementById("car-years").value ,
      "CarModel":  document.getElementById("car-models").value ,
      "CarSize":  "small" ,
-     "service1":  document.getElementById("service1").value ,
-     "service2":  document.getElementById("service2").value ,
-     "service3":  document.getElementById("service3").value ,
-     "service4":  document.getElementById("service4").value ,
+
     }
 
      var jsonStr = JSON.parse(JSON.stringify(json));
@@ -228,12 +225,17 @@ text-align: center;
 
 }
 
-$(document).ready(function() {
-  $("#fimg").click(function(){
-    alert("dfkjg");
-  $(this).toggleClass("check");
+
+
+$(document).ready(function () {
+    $(".img-check").on('click', function () {
+      $(this).toggleClass("check");
+
+    });
+
 });
-});
+
+
 
 
 function populate() {
@@ -417,7 +419,7 @@ if(i<3){
     	<div class="row">
     		<form method="get">
     		<div class="form-group">
-    		<div class="col-md-3"><label id="fimg" class="btn imgbttn"><img  src="./img/CarShine.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off"></label></div>
+    		<div class="col-md-3" ><label id="fimg" class="btn imgbttn" ><img  src="./img/CarShine.jpg" alt="..." class="img-thumbnail img-check" ><input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off"></label></div>
     		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/car-interior-cleaning.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk2" id="item4" value="val2" class="hidden" autocomplete="off"></label></div>
     		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/engineClean.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="item4" value="val3" class="hidden" autocomplete="off"></label></div>
     		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="item4" value="val4" class="hidden" autocomplete="off"></label></div>

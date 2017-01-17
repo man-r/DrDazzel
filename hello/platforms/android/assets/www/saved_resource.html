@@ -11,7 +11,12 @@
   <script src="./js/jquery.mobile-1.4.5.min.js"></script>
   <script type="text/javascript" src="./jquery-1.4.4.min.js"></script>
 
+  <script type="text/javascript"  src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
 
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/bootstrap.css">
 
 
     <link rel="stylesheet" type="text/css" href="./normalize.css">
@@ -26,6 +31,20 @@
 
 
   <style type="text/css">
+
+  .check
+{
+opacity:0.5;
+color:#996;
+
+}
+
+.img-check , .imgbttn{
+
+width: 100%;
+padding: 0px;
+}
+
     body {
     padding: 0px;
 }
@@ -46,8 +65,85 @@ button.mybtn {
   position: absolute;
   width: 100%;
   bottom: -5px;
+  z-index: 15;
 }
+.invoice-box{
+        max-width:800px;
+        margin:auto;
+        padding:30px;
+        border:1px solid #eee;
+        box-shadow:0 0 10px rgba(0, 0, 0, .15);
+        font-size:16px;
+        line-height:24px;
+        font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color:#555;
+    }
 
+    .invoice-box table{
+        width:100%;
+        line-height:inherit;
+        text-align:left;
+    }
+
+    .invoice-box table td{
+        padding:5px;
+        vertical-align:top;
+    }
+
+    .invoice-box table tr td:nth-child(2){
+        text-align:right;
+    }
+
+    .invoice-box table tr.top table td{
+        padding-bottom:20px;
+    }
+
+    .invoice-box table tr.top table td.title{
+        font-size:45px;
+        line-height:45px;
+        color:#333;
+    }
+
+    .invoice-box table tr.information table td{
+        padding-bottom:40px;
+    }
+
+    .invoice-box table tr.heading td{
+        background:#eee;
+        border-bottom:1px solid #ddd;
+        font-weight:bold;
+    }
+
+    .invoice-box table tr.details td{
+        padding-bottom:20px;
+    }
+
+    .invoice-box table tr.item td{
+        border-bottom:1px solid #eee;
+    }
+
+    .invoice-box table tr.item.last td{
+        border-bottom:none;
+    }
+
+    .invoice-box table tr.total td:nth-child(2){
+        border-top:2px solid #eee;
+        font-weight:bold;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td{
+            width:100%;
+            display:block;
+            text-align:center;
+        }
+
+        .invoice-box table tr.information table td{
+            width:100%;
+            display:block;
+            text-align:center;
+        }
+    }
 #container {
     position: absolute;
     margin: 0px;
@@ -56,6 +152,17 @@ button.mybtn {
     height: 100%;
     overflow: hidden;
 }
+
+#Invoice {
+    width: 100%;
+    line-height: 100% !important;
+    top: 10px;
+}
+
+th{
+text-align: center;
+}
+
 
 .box {
   position: absolute;
@@ -77,6 +184,7 @@ button.mybtn {
 
 #box2 {
     background-color: #e8e8e8;
+    overflow: scroll;
 }
 
 #box3 {
@@ -93,25 +201,112 @@ button.mybtn {
 
   </style>
 
-  <title> by jtbowden</title>
 
-
-
-
-
+  <title>DrDazzle</title>
 
 
 <script type="text/javascript">//<![CDATA[
+
+  function StoreJson(){
+
+    var json = {
+     "CarMake":  document.getElementById("car-makes").value ,
+     "Year":  document.getElementById("car-years").value ,
+     "CarModel":  document.getElementById("car-models").value ,
+     "CarSize":  "small" ,
+
+    }
+
+     var jsonStr = JSON.parse(JSON.stringify(json));
+    console.log(jsonStr);
+    alert(jsonStr.CarMake);
+    document.getElementById("Car-make-invoice").innerHTML = jsonStr.CarMake;
+    document.getElementById("Car-year-invoice").innerHTML = jsonStr.Year;
+    document.getElementById("Car-model-invoice").innerHTML = jsonStr.CarModel;
+
+}
+
+$(document).ready(function() {
+  $("#fimg").click(function(){
+  $(this).toggleClass("check");
+});
+});
+
+
+function populate() {
+  $(document).ready(
+    function()
+    {
+
+       //Create a variable for the CarQuery object.  You can call it whatever you like.
+       var carquery = new CarQuery();
+
+       //Run the carquery init function to get things started:
+       carquery.init();
+
+       //Optional: initialize the year, make, model, and trim drop downs by providing their element IDs
+       carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
+
+       //Optional: set the onclick event for a button to show car data.
+       $('#cq-show-data').click(  function(){ carquery.populateCarData('car-model-data'); } );
+
+       //Optional: initialize the make, model, trim lists by providing their element IDs.
+       carquery.initMakeModelTrimList('make-list', 'model-list', 'trim-list', 'trim-data-list');
+
+       //Optional: set minimum and/or maximum year options.
+       carquery.year_select_min=1900;
+       carquery.year_select_max=2017;
+
+       //Optional: initialize search interface elements.
+       //The IDs provided below are the IDs of the text and select inputs that will be used to set the search criteria.
+       //All values are optional, and will be set to the default values provided below if not specified.
+       var searchArgs =
+       ({
+           body_id:                       "cq-body"
+          ,default_search_text:           "Keyword Search"
+          ,doors_id:                      "cq-doors"
+          ,drive_id:                      "cq-drive"
+          ,engine_position_id:            "cq-engine-position"
+          ,engine_type_id:                "cq-engine-type"
+          ,fuel_type_id:                  "cq-fuel-type"
+          ,min_cylinders_id:              "cq-min-cylinders"
+          ,min_mpg_hwy_id:                "cq-min-mpg-hwy"
+          ,min_power_id:                  "cq-min-power"
+          ,min_top_speed_id:              "cq-min-top-speed"
+          ,min_torque_id:                 "cq-min-torque"
+          ,min_weight_id:                 "cq-min-weight"
+          ,min_year_id:                   "cq-min-year"
+          ,max_cylinders_id:              "cq-max-cylinders"
+          ,max_mpg_hwy_id:                "cq-max-mpg-hwy"
+          ,max_power_id:                  "cq-max-power"
+          ,max_top_speed_id:              "cq-max-top-speed"
+          ,max_weight_id:                 "cq-max-weight"
+          ,max_year_id:                   "cq-max-year"
+          ,search_controls_id:            "cq-search-controls"
+          ,search_input_id:               "cq-search-input"
+          ,search_results_id:             "cq-search-results"
+          ,search_result_id:              "cq-search-result"
+          ,seats_id:                      "cq-seats"
+          ,sold_in_us_id:                 "cq-sold-in-us"
+       });
+       carquery.initSearchInterface(searchArgs);
+
+       //If creating a search interface, set onclick event for the search button.  Make sure the ID used matches your search button ID.
+       $('#cq-search-btn').click( function(){ carquery.search(); } );
+  });
+}
+
 $(window).load(function(){
   var i = 1;
 $('#Next').click(function() {
+if(i<3){
 
     $("#box"+i).animate({
         left: '-50%'
     }, 500, function() {
         $("#box"+i).css('left', '150%');
         $("#box"+i).appendTo('#container');
-        if(i == 5){
+        if(i == 3){
 
          i = 1;
 
@@ -126,6 +321,14 @@ $('#Next').click(function() {
         left: '50%'
     }, 500);
 
+    if(i == 2) {
+
+    document.getElementById("Next").innerHTML = "Send";
+
+    }
+}
+
+
 
 });
 
@@ -137,7 +340,7 @@ $('#Next').click(function() {
 
 </head>
 
-<body>
+<body onload="populate()">
   <div id="container">
 
 
@@ -151,15 +354,8 @@ $('#Next').click(function() {
     <div data-role="main" class="ui-content">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
-
-          <select name="day" id="CarMake">
-            <option value="mon">Select Make</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
+          <select name="car-years" id="car-years">
+            <option value="">Select year</option>
           </select>
         </fieldset>
       </form>
@@ -169,14 +365,8 @@ $('#Next').click(function() {
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
 
-          <select name="day" id="Year">
-            <option value="mon">Select Year</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
+          <select name="car-makes" id="car-makes">
+            <option value="mon">Select make</option>
           </select>
         </fieldset>
       </form>
@@ -186,35 +376,23 @@ $('#Next').click(function() {
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
 
-          <select name="day" id="CarModel">
+          <select name="car-models" id="car-models">
             <option value="mon">Select Model</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
           </select>
         </fieldset>
       </form>
     </div>
 
-    <div data-role="main" class="ui-content">
+    <!-- <div data-role="main" class="ui-content">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
 
-          <select name="day" id="CarSize">
-            <option value="mon">Size Of The Car </option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
+          <select name="car-model-trims" id="car-model-trims">
+            <option value="mon">Size trim </option>
           </select>
         </fieldset>
       </form>
-    </div>
+    </div> -->
 
 
 
@@ -232,79 +410,20 @@ $('#Next').click(function() {
 
   <div id="box2form">
 
-    <div data-role="main" class="ui-content">
-      <form method="post" action="demoform.asp">
-        <fieldset class="ui-field-contain">
-
-          <select name="day" id="service1">
-            <option value="mon">Select service 1</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
-          </select>
-        </fieldset>
-      </form>
+    <div class="container">
+    	<div class="row">
+    		<form method="get">
+    		<div class="form-group">
+    		<div class="col-md-3"><label id="fimg" class="btn imgbttn"><img  src="./img/CarShine.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off"></label></div>
+    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/car-interior-cleaning.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk2" id="item4" value="val2" class="hidden" autocomplete="off"></label></div>
+    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/engineClean.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="item4" value="val3" class="hidden" autocomplete="off"></label></div>
+    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="item4" value="val4" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="item4" value="val3" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="item4" value="val4" class="hidden" autocomplete="off"></label></div>
+        </div>
+    		</form>
+    	</div>
     </div>
-
-
-    <div data-role="main" class="ui-content">
-      <form method="post" action="demoform.asp">
-        <fieldset class="ui-field-contain">
-
-          <select name="day" id="service2">
-            <option value="mon">Select service 2</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
-          </select>
-        </fieldset>
-      </form>
-    </div>
-
-
-
-    <div data-role="main" class="ui-content">
-      <form method="post" action="demoform.asp">
-        <fieldset class="ui-field-contain">
-
-          <select name="day" id="service3">
-            <option value="mon">Select service 3</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
-          </select>
-        </fieldset>
-      </form>
-    </div>
-
-
-
-    <div data-role="main" class="ui-content">
-      <form method="post" action="demoform.asp">
-        <fieldset class="ui-field-contain">
-
-          <select name="day" id="service4">
-            <option value="mon">select service 4</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
-          </select>
-        </fieldset>
-      </form>
-    </div>
-
 
   </div>
   </div>
@@ -315,18 +434,145 @@ $('#Next').click(function() {
 
 
 
-<div id="box3" class="box" style="left: 150%;">Div #3</div>
+<div id="box3" class="box" style="left: 150%;overflow:scroll">
+
+<!--
+  <p id="CarMake"> Car Make + json.CarMake </p>
+  <p id="Year"> Year +  json.Year      </p>
+  <p id="CarModel">Car Model+json.CarModel </p>
+  <p id="CarSize">Car Size + json.CarSize </p>
+  <p id="service1">service1 +json.service1 </p>
+  <p id="service2">service2 + json.service2</p>
+  <p id="service3">service3 + json.service3</p>
+  <p id="service4">service4 + json.service4</p>
+
+-->
+<div class="col-xs-5" id="Invoice">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>From: <a href="#">Your Name</a></h4>
+            </div>
+            <div class="panel-body">
+              <p id="Car-year-invoice"></p>
+              <p id="Car-make-invoice"></p>
+              <p id="Car-model-invoice"></p>
+
+              <br>
+
+              <br>
+              <h1 style="font-size: 200%;">Services<h1>
+
+              <br>
+
+              <br>
+              <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;">
+                            </td>
+
+                            <td>
+                                Invoice #: 123<br>
+                                Created: January 1, 2015<br>
+                                Due: February 1, 2015
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="heading">
+                <td>
+                    Payment Method
+                </td>
+
+                <td>
+                    Check #
+                </td>
+            </tr>
+
+            <tr class="details">
+                <td>
+                    Check
+                </td>
+
+                <td>
+                    1000
+                </td>
+            </tr>
+
+            <tr class="heading">
+                <td>
+                    Service
+                </td>
+
+                <td>
+                    Price
+                </td>
+            </tr>
+
+            <tr class="item">
+                <td>
+                    Website design
+                </td>
+
+                <td>
+                    $300.00
+                </td>
+            </tr>
+
+            <tr class="item">
+                <td>
+                    Hosting (3 months)
+                </td>
+
+                <td>
+                    $75.00
+                </td>
+            </tr>
+
+            <tr class="item last">
+                <td>
+                    Domain name (1 year)
+                </td>
+
+                <td>
+                    $10.00
+                </td>
+            </tr>
+
+            <tr class="total">
+                <td></td>
+
+                <td>
+                   Total: $385.00
+                </td>
+            </tr>
+        </table>
+    </div>
+            </div>
+          </div>
+</div>
+
+
+
+
+</div>
 
 
 
 
 
-<div id="box4" class="box" style="left: 150%;">Div #4</div>
+<!--<div id="box4" class="box" style="left: 150%;">Div #4</div>
 
 
 
 
-<div id="box5" class="box" style="left: 150%;">Div #5</div></div>
+<div id="box5" class="box" style="left: 150%;">Div #5</div></div>-->
 
 
   <script>
@@ -339,10 +585,11 @@ $('#Next').click(function() {
   }
 </script>
 
+
 <div class="btndiv">
 
 <button class="mybtn" id="Previous">Previous</button>
-<button class="mybtn" id="Next">Next</button>
+<button class="mybtn" id="Next" onclick="StoreJson()">Next</button>
 
 
 </div>
