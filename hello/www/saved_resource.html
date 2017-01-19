@@ -207,9 +207,25 @@ text-align: center;
 
 <script type="text/javascript">//<![CDATA[
 
+  var json;
+  
+  function passToPHP() {
+
+          $.ajax(
+          {
+              type: "POST",
+              url: 'http://home-like.appengine.flow.ch/dazzle.php',
+              data: json,
+              success: function()
+              {
+                  // if you need to do something else
+              }
+          });
+
+  }
   function StoreJson(){
 
-    var json = {
+    json = {
      "CarMake":  document.getElementById("car-makes").value ,
      "Year":  document.getElementById("car-years").value ,
      "CarModel":  document.getElementById("car-models").value ,
@@ -313,8 +329,10 @@ if(i<3){
         $("#box"+i).appendTo('#container');
         if(i == 3){
 
+         console.log("Sent");
          i = 1;
-
+         passToPHP(json);
+          
        }else {
 
          i++;
