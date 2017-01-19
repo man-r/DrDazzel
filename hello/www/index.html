@@ -51,7 +51,22 @@ width: 100%;
 
 </style>
 <script>
-function HH(){ window.location.href = "Page2.html";}
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+  xmlhttp.open("POST", "http://home-like.appengine.flow.ch/dazzle.php");
+  xmlhttp.setRequestHeader("Content-Type", "application/json");
+  xmlhttp.onreadystatechange = function () { 
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        console.log(xmlhttp.responseText)
+    }
+}
+  xmlhttp.send(JSON.stringify({name:"John Rambo", time:"2pm"}));
+
+function start(){ 
+  window.location.href = "Page2.html";
+
+
+}
+
 </script>
 
 <body >
@@ -61,7 +76,7 @@ function HH(){ window.location.href = "Page2.html";}
   </div>
 
 <Div id="startBtnDiv">
-  <button class="btn btn-danger" id="startBtn" type="button" onclick="HH()" style="zoom:3;">Find Nearby</button>
+  <button class="btn btn-danger" id="startBtn" type="button" onclick="start()" style="zoom:3;">Find Nearby</button>
 </div>
 
 </body>
