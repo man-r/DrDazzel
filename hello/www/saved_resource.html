@@ -207,37 +207,49 @@ text-align: center;
 
 <script type="text/javascript">//<![CDATA[
 
-  var json;
-  
-  function passToPHP() {
+var json;
 
-          $.ajax(
-          {
-              type: "POST",
-              url: 'http://home-like.appengine.flow.ch/dazzle.php',
-              data: json,
-              success: function()
-              {
-                  // if you need to do something else
-              }
-          });
+  function passToPHP(json) {
+          console.log(json.Year);
 
-  }
+          $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: "http://home-like.appengine.flow.ch/dazzle.php",
+        data: json,
+        success: function(data){
+            alert('Items sent');
+        },
+        error: function(e){
+            console.log(e.message);
+            console.log(e);
+        }
+});
+
+}
+
+
+
   function StoreJson(){
 
-    json = {
-     "CarMake":  document.getElementById("car-makes").value ,
-     "Year":  document.getElementById("car-years").value ,
-     "CarModel":  document.getElementById("car-models").value ,
-     "CarSize":  "small" ,
+     json = {
+     "name":  "" ,
+     "email":  "" ,
+     "location":  "" ,
+     "carmake":  document.getElementById("car-makes").value ,
+     "caryear":  document.getElementById("car-years").value ,
+     "carmodel":  document.getElementById("car-models").value ,
+     "carsize":  "small" ,
+     "services":  "" ,
+
 
     }
 
      var jsonStr = JSON.parse(JSON.stringify(json));
     console.log(jsonStr);
-    document.getElementById("Car-make-invoice").innerHTML = jsonStr.CarMake;
-    document.getElementById("Car-year-invoice").innerHTML = jsonStr.Year;
-    document.getElementById("Car-model-invoice").innerHTML = jsonStr.CarModel;
+    document.getElementById("Car-make-invoice").innerHTML = jsonStr.carmake;
+    document.getElementById("Car-year-invoice").innerHTML = jsonStr.caryear;
+    document.getElementById("Car-model-invoice").innerHTML = jsonStr.carmodel;
 
 }
 
@@ -246,7 +258,6 @@ text-align: center;
 $(document).ready(function () {
     $(".img-check").on('click touchstart', function () {
       $(this).toggleClass("check");
-
     });
 
 });
@@ -320,23 +331,26 @@ function populate() {
 $(window).load(function(){
   var i = 1;
 $('#Next').click(function() {
+
+  if(document.getElementById("Next").innerHTML == "Send"){
+
+      passToPHP(json);
+
+  }
 if(i<3){
 
     $("#box"+i).animate({
         left: '-50%'
     }, 500, function() {
         $("#box"+i).css('left', '150%');
-        $("#box"+i).appendTo('#container');
-        if(i == 3){
+         <!--$("#box"+i).appendTo('#container');-->
+        if(i < 3){
 
-         console.log("Sent");
-         i = 1;
-         passToPHP(json);
-          
-       }else {
 
-         i++;
-       }
+        i++;
+
+      }
+
 
     });
 
@@ -350,6 +364,34 @@ if(i<3){
 
     }
 }
+
+
+});
+
+$('#Previous').click(function() {
+
+if(i > 1){
+
+
+  $("#box"+i).animate({
+      left: '150%'
+  }, 500, function() {
+console.log(i + ">");
+    $("#box"+i).css('left', '150%');
+i--;
+$("#box"+i).css('left', '50%');
+console.log(i);
+
+  });
+
+
+
+}
+
+
+
+
+
 
 
 
