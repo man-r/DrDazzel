@@ -184,12 +184,12 @@ text-align: center;
 }
 
 #box2 {
-    background-color: #e8e8e8;
+    background-color: #f3f3f3;
     overflow: scroll;
 }
 
 #box3 {
-    background-color: #e8e8e8;
+    background-color: #f3f3f3;
 }
 
 #box4 {
@@ -205,7 +205,7 @@ text-align: center;
 
 background: white !important;
 height: 50px;
-
+font-size: 20px;
 
 }
 
@@ -233,8 +233,42 @@ height: 50px;
 <script type="text/javascript">//<![CDATA[
 
 var json;
+var services= "";
+
+function Getservices(){
+
+if(document.getElementById("bodyshine").checked){
+services += "body waxing\n";
+}
+
+if(document.getElementById("interiorshine").checked){
+services += "interior waxing\n";
+}
+
+if(document.getElementById("engineshine").checked){
+services += "engine waxing\n";
+}
+
+if(document.getElementById("nano6m").checked){
+services += "nano 6m\n";
+}
+
+if(document.getElementById("nano1y").checked){
+services += "nano 1y\n";
+}
+
+if(document.getElementById("nano2y").checked){
+services += "nano 2y\n";
+}
+
+
+}
+
 
   function passToPHP(json) {
+
+          Getservices();
+
           console.log(json.Year);
 
           $.ajax({
@@ -257,6 +291,7 @@ var json;
 
   function StoreJson(){
 
+
      json = {
      "name":  document.getElementById("InputName").value ,
      "email":  document.getElementById("InputEmail").value ,
@@ -265,9 +300,7 @@ var json;
      "caryear":  document.getElementById("car-years").value ,
      "carmodel":  document.getElementById("car-models").value ,
      "carsize":  "small" ,
-     "services":  "" ,
-
-
+     "services":  ""+services+"",
     }
 
      var jsonStr = JSON.parse(JSON.stringify(json));
@@ -353,9 +386,17 @@ function populate() {
   });
 }
 
+
+$(document).on("pagecreate","#pageone",function(){
+  $("box1").on("swipeleft",function(){
+    alert("You swiped left!");
+  });
+});
+
 $(window).load(function(){
   var i = 1;
-$('#Next').click(function() {
+$('#Next').on( "click",function() {
+Getservices();
 
   if(document.getElementById("Next").innerHTML == "Send"){
 
@@ -511,12 +552,12 @@ console.log(i);
     	<div class="row">
     		<form method="get">
     		<div class="form-group">
-    		<div class="col-md-3" ><label id="fimg" class="btn imgbttn" ><img  src="./img/CarShine2.jpg" alt="..." class="img-thumbnail img-check" ><input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off"></label></div>
-    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/car-interior-cleaning2.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk2" id="item4" value="val2" class="hidden" autocomplete="off"></label></div>
-    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/engineClean2.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="item4" value="val3" class="hidden" autocomplete="off"></label></div>
-    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="item4" value="val4" class="hidden" autocomplete="off"></label></div>
-        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="item4" value="val3" class="hidden" autocomplete="off"></label></div>
-        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="item4" value="val4" class="hidden" autocomplete="off"></label></div>
+    		<div class="col-md-3" ><label id="fimg" class="btn imgbttn" ><img  src="./img/CarShine2.jpg" alt="..." class="img-thumbnail img-check" ><input type="checkbox" name="chk1" id="bodyshine" value="val1" class="hidden" autocomplete="off"></label></div>
+    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/car-interior-cleaning2.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk2" id="interiorshine" value="val2" class="hidden" autocomplete="off"></label></div>
+    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/engineClean2.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="engineshine" value="val3" class="hidden" autocomplete="off"></label></div>
+    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="nano6m" value="val4" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="nano1y" value="val3" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="nano2y" value="val4" class="hidden" autocomplete="off"></label></div>
         </div>
     		</form>
     	</div>
