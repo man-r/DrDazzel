@@ -199,6 +199,26 @@ text-align: center;
     background-color: #e8e8e8;
 }
 
+
+.forminput {
+
+background: white !important;
+height: 50px;
+
+
+}
+
+
+.myform {
+    margin-bottom: 15px;
+    width: 95%;
+    /* align-self: center; */
+    /* position: absolute; */
+    padding: 0px 0px 0px 20px;
+    line-height: 20px;
+    padding: 20% 0px 0px 20px;
+}
+
   </style>
 
 
@@ -233,8 +253,8 @@ var json;
   function StoreJson(){
 
      json = {
-     "name":  "" ,
-     "email":  "" ,
+     "name":  document.getElementById("InputName").value ,
+     "email":  document.getElementById("InputEmail").value ,
      "location":  "" ,
      "carmake":  document.getElementById("car-makes").value ,
      "caryear":  document.getElementById("car-years").value ,
@@ -409,13 +429,20 @@ console.log(i);
   <div id="container">
 
 
-<div id="box1" class="box" style="left: 50%;">
+<div id="box1" class="box" style="left: 50%;line-height: 60px;">
 
   <div>
 
 
 <div id="box1form">
 
+  <div class="form-group myform">
+    <label for="exampleInputEmail1">Name</label>
+    <input type="email" class="form-control forminput" id="InputName" aria-describedby="emailHelp" placeholder="Enter Your Name ">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control forminput" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+  </div>
+<label for="exampleInputEmail1">Car Info</label>
     <div data-role="main" class="ui-content">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
