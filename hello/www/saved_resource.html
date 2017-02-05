@@ -224,6 +224,13 @@ font-size: 20px;
   width: 40% !important;
 }
 
+.imgWrapper{
+
+text-align: center;
+
+
+}
+
 .labels{
   padding-top: 5%;
       font-size: xx-large;
@@ -516,22 +523,47 @@ $("#box"+i).css('left', '50%');
 <label for="exampleInputEmail1">Car Info</label>
 
 <div>
-<button type="button" class="btn btn-default car-size"><img  src="./icons/sedan.png" alt="..." class="" ></button>
 
-<button type="button" class="btn btn-default car-size"><img  src="./icons/suv.png" alt="..." class="" ></button>
+  <div class="imgWrapper car-size">
+<button type="button" class="btn btn-default car-size"><img  src="./icons/sedan.png" alt="..." class="" ><p>سيدان</p></button>
+
 </div>
 
 
+    <div class="imgWrapper car-size">
+<button type="button" class="btn btn-default car-size"><img  src="./icons/suv.png" alt="..." class="" ><p>جيب</p></button>
+
+</div>
+
+</div>
 
 
 <div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-default"><img  src="./icons/sedan.png" alt="..." class=""  style="width: 80px; height: 40px;"></a>
-  <a href="#" class="btn btn-default"><img  src="./icons/sedan-med.png" alt="..." class="" style="width: 80px; height: 40px;"></a>
-  <a href="#" class="btn btn-default"><img  src="./icons/sedan-small.png" alt="..." class="" style="width: 80px; height: 40px;"></a>
+  <a href="#" class="btn btn-default">
+
+<div class="imgWrapper">
+    <img  src="./icons/sedan.png" alt="..." class=""  style="width: 80px; height: 40px;">
+    <p>كبيره</p>
 </div>
 
 
+  </a>
+  <a href="#" class="btn btn-default">
+<div class="imgWrapper">
+    <img  src="./icons/sedan-med.png" alt="..." class="" style="width: 80px; height: 40px;">
+    <p>وسط</p>
+</div>
+  </a>
+  <a href="#" class="btn btn-default">
+<div class="imgWrapper">
+    <img  src="./icons/sedan-small.png" alt="..." class="" style="width: 80px; height: 40px;">
+    <p>صغيرة</p>
+</div>
+  </a>
+</div>
 
+
+<h1>Text Here</h1>
     <div data-role="main" class="ui-content" style="display:none;">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
