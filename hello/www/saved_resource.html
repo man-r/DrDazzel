@@ -209,6 +209,21 @@ font-size: 20px;
 
 }
 
+
+.btn-group{
+
+  padding-top: 5%;
+  width: 90%;
+  left: 5%;
+
+
+}
+
+.car-size {
+  display: inline;
+  width: 40% !important;
+}
+
 .labels{
   padding-top: 5%;
       font-size: xx-large;
@@ -260,6 +275,23 @@ services += "nano 1y\n";
 if(document.getElementById("nano2y").checked){
 services += "nano 2y\n";
 }
+
+
+}
+
+function fillInvoice(){
+
+var splitter = services;
+
+splitter = splitter.split("\n");
+
+ for (var g = 0; g < 6 && splitter[g] != null ; g++) {
+
+   console.log(g);
+   document.getElementById('service'+g).innerHTML = splitter[g];
+
+ }
+
 
 
 }
@@ -397,7 +429,7 @@ $(window).load(function(){
   var i = 1;
 $('#Next').on( "click",function() {
 Getservices();
-
+fillInvoice();
   if(document.getElementById("Next").innerHTML == "Send"){
 
       passToPHP(json);
@@ -411,13 +443,8 @@ if(i<3){
         $("#box"+i).css('left', '150%');
          <!--$("#box"+i).appendTo('#container');-->
         if(i < 3){
-
-
         i++;
-
       }
-
-
     });
 
     $("#box"+i).next().animate({
@@ -442,11 +469,9 @@ if(i > 1){
   $("#box"+i).animate({
       left: '150%'
   }, 500, function() {
-console.log(i + ">");
-    $("#box"+i).css('left', '150%');
 i--;
 $("#box"+i).css('left', '50%');
-console.log(i);
+
 
   });
 
@@ -489,7 +514,25 @@ console.log(i);
     <input type="email" class="form-control forminput" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email">
   </div>
 <label for="exampleInputEmail1">Car Info</label>
-    <div data-role="main" class="ui-content">
+
+<div>
+<button type="button" class="btn btn-default car-size"><img  src="./icons/sedan.png" alt="..." class="" ></button>
+
+<button type="button" class="btn btn-default car-size"><img  src="./icons/suv.png" alt="..." class="" ></button>
+</div>
+
+
+
+
+<div class="btn-group btn-group-justified">
+  <a href="#" class="btn btn-default"><img  src="./icons/sedan.png" alt="..." class=""  style="width: 80px; height: 40px;"></a>
+  <a href="#" class="btn btn-default"><img  src="./icons/sedan-med.png" alt="..." class="" style="width: 80px; height: 40px;"></a>
+  <a href="#" class="btn btn-default"><img  src="./icons/sedan-small.png" alt="..." class="" style="width: 80px; height: 40px;"></a>
+</div>
+
+
+
+    <div data-role="main" class="ui-content" style="display:none;">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
           <select name="car-years" id="car-years">
@@ -499,7 +542,7 @@ console.log(i);
       </form>
     </div>
 
-    <div data-role="main" class="ui-content">
+    <div data-role="main" class="ui-content" style="display:none;">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
 
@@ -510,7 +553,7 @@ console.log(i);
       </form>
     </div>
 
-    <div data-role="main" class="ui-content">
+    <div data-role="main" class="ui-content" style="display:none;">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
 
@@ -654,40 +697,40 @@ console.log(i);
             </tr>
 
             <tr class="item">
-                <td>
-                    Website design
+                <td id="service0">
+
                 </td>
 
-                <td>
-                    $300.00
+                <td id="price1">
+
                 </td>
             </tr>
 
             <tr class="item">
-                <td>
-                    Hosting (3 months)
+                <td id="service1">
+
                 </td>
 
-                <td>
-                    $75.00
+                <td id="price2">
+
                 </td>
             </tr>
 
             <tr class="item last">
-                <td>
-                    Domain name (1 year)
+                <td id="service2">
+
                 </td>
 
-                <td>
-                    $10.00
+                <td id="price3">
+
                 </td>
             </tr>
 
             <tr class="total">
                 <td></td>
 
-                <td>
-                   Total: $385.00
+                <td id="total">
+
                 </td>
             </tr>
         </table>
