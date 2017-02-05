@@ -236,6 +236,13 @@ text-align: center;
       font-size: xx-large;
 }
 
+.myselected{
+
+background-color: #dcdcdc !important;
+border-color: #428bca !important;
+
+}
+
 .myform {
     margin-bottom: 15px;
     width: 95%;
@@ -496,7 +503,48 @@ $("#box"+i).css('left', '50%');
 });
 
 
+$('.sizeSelector').on('click touchend',function() {
+
+
+if ( $(this).hasClass('myselected') ) {
+
+$('.sizeSelector').removeClass('myselected');
+$(this).addClass('myselected');
+
+}else {
+
+$('.sizeSelector').removeClass('myselected');
+$(this).addClass('myselected');
+
+}
+
+});
+
+
+$('.selectcar').on('click touchend',function() {
+
+
+if ( $(this).hasClass('myselected') ) {
+
+$('.selectcar').removeClass('myselected');
+$(this).addClass('myselected');
+
+}else {
+
+$('.selectcar').removeClass('myselected');
+$(this).addClass('myselected');
+
+}
+
+});
+
 });//]]>
+
+
+
+
+
+
 
 </script>
 
@@ -525,13 +573,13 @@ $("#box"+i).css('left', '50%');
 <div>
 
   <div class="imgWrapper car-size">
-<button type="button" class="btn btn-default car-size"><img  src="./icons/sedan.png" alt="..." class="" ><p>سيدان</p></button>
+<button type="button" class="btn btn-default car-size selectcar"><img  src="./icons/sedan.png" alt="..." class="" ><p>سيدان</p></button>
 
 </div>
 
 
     <div class="imgWrapper car-size">
-<button type="button" class="btn btn-default car-size"><img  src="./icons/suv.png" alt="..." class="" ><p>جيب</p></button>
+<button type="button" class="btn btn-default car-size selectcar"><img  src="./icons/suv.png" alt="..." class="" ><p>جيب</p></button>
 
 </div>
 
@@ -539,7 +587,7 @@ $("#box"+i).css('left', '50%');
 
 
 <div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-default">
+  <a href="#" class="btn btn-default sizeSelector">
 
 <div class="imgWrapper">
     <img  src="./icons/sedan.png" alt="..." class=""  style="width: 80px; height: 40px;">
@@ -548,13 +596,13 @@ $("#box"+i).css('left', '50%');
 
 
   </a>
-  <a href="#" class="btn btn-default">
+  <a href="#" class="btn btn-default sizeSelector">
 <div class="imgWrapper">
     <img  src="./icons/sedan-med.png" alt="..." class="" style="width: 80px; height: 40px;">
     <p>وسط</p>
 </div>
   </a>
-  <a href="#" class="btn btn-default">
+  <a href="#" class="btn btn-default sizeSelector">
 <div class="imgWrapper">
     <img  src="./icons/sedan-small.png" alt="..." class="" style="width: 80px; height: 40px;">
     <p>صغيرة</p>
@@ -563,7 +611,13 @@ $("#box"+i).css('left', '50%');
 </div>
 
 
+
+
+
 <h1>Text Here</h1>
+
+
+
     <div data-role="main" class="ui-content" style="display:none;">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
