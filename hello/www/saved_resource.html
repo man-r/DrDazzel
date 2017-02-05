@@ -263,6 +263,10 @@ border-color: #428bca !important;
 
 var json;
 var services= "";
+var carsize="";
+var cartype="";
+
+
 
 function Getservices(){
 
@@ -296,6 +300,7 @@ services += "nano 2y\n";
 function fillInvoice(){
 
 var splitter = services;
+
 
 splitter = splitter.split("\n");
 
@@ -345,7 +350,8 @@ splitter = splitter.split("\n");
      "carmake":  document.getElementById("car-makes").value ,
      "caryear":  document.getElementById("car-years").value ,
      "carmodel":  document.getElementById("car-models").value ,
-     "carsize":  "small" ,
+     "carsize":       carsize   ,
+     "cartype":       cartype   ,
      "services":  ""+services+"",
     }
 
@@ -511,10 +517,13 @@ if ( $(this).hasClass('myselected') ) {
 $('.sizeSelector').removeClass('myselected');
 $(this).addClass('myselected');
 
+carsize = this.id;
+
 }else {
 
 $('.sizeSelector').removeClass('myselected');
 $(this).addClass('myselected');
+carsize = this.id;
 
 }
 
@@ -524,15 +533,38 @@ $(this).addClass('myselected');
 $('.selectcar').on('click touchend',function() {
 
 
+if(this.id == "sedan"){
+
+  $("#carpic1").attr('src', './icons/sedan.png');
+
+  $("#carpic2").attr('src', './icons/sedan-med.png');
+
+  $("#carpic3").attr('src', './icons/sedan-small.png');
+
+
+
+}else {
+
+  $("#carpic1").attr('src', './icons/suv.png');
+
+  $("#carpic2").attr('src', './icons/suv-med.png');
+
+  $("#carpic3").attr('src', './icons/suv-small.png');
+
+}
+
+
 if ( $(this).hasClass('myselected') ) {
 
 $('.selectcar').removeClass('myselected');
 $(this).addClass('myselected');
+cartype = this.id;
 
 }else {
 
 $('.selectcar').removeClass('myselected');
 $(this).addClass('myselected');
+cartype = this.id;
 
 }
 
@@ -573,13 +605,13 @@ $(this).addClass('myselected');
 <div>
 
   <div class="imgWrapper car-size">
-<button type="button" class="btn btn-default car-size selectcar"><img  src="./icons/sedan.png" alt="..." class="" ><p>سيدان</p></button>
+<button type="button" class="btn btn-default car-size selectcar" id="sedan"><img  src="./icons/sedan.png" alt="..." class="" ><p>سيدان</p></button>
 
 </div>
 
 
     <div class="imgWrapper car-size">
-<button type="button" class="btn btn-default car-size selectcar"><img  src="./icons/suv.png" alt="..." class="" ><p>جيب</p></button>
+<button type="button" class="btn btn-default car-size selectcar" id="suv"><img  src="./icons/suv.png" alt="..." class="" ><p>جيب</p></button>
 
 </div>
 
@@ -587,24 +619,24 @@ $(this).addClass('myselected');
 
 
 <div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-default sizeSelector">
+  <a href="#" class="btn btn-default sizeSelector" id="big">
 
 <div class="imgWrapper">
-    <img  src="./icons/sedan.png" alt="..." class=""  style="width: 80px; height: 40px;">
+    <img  id="carpic1" src="./icons/sedan.png" alt="..." class=""  style="width: 80px; height: 40px;">
     <p>كبيره</p>
 </div>
 
 
   </a>
-  <a href="#" class="btn btn-default sizeSelector">
+  <a href="#" class="btn btn-default sizeSelector" id="medium">
 <div class="imgWrapper">
-    <img  src="./icons/sedan-med.png" alt="..." class="" style="width: 80px; height: 40px;">
+    <img  id="carpic2" src="./icons/sedan-med.png" alt="..." class="" style="width: 80px; height: 40px;">
     <p>وسط</p>
 </div>
   </a>
-  <a href="#" class="btn btn-default sizeSelector">
+  <a href="#" class="btn btn-default sizeSelector" id="small">
 <div class="imgWrapper">
-    <img  src="./icons/sedan-small.png" alt="..." class="" style="width: 80px; height: 40px;">
+    <img  id="carpic3" src="./icons/sedan-small.png" alt="..." class="" style="width: 80px; height: 40px;">
     <p>صغيرة</p>
 </div>
   </a>
