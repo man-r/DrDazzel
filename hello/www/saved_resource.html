@@ -68,6 +68,18 @@ button.mybtn {
   bottom: -5px;
   z-index: 15;
 }
+
+
+.cartypee{
+
+  width:90%;
+    height:90%;
+    border: 0;
+  background-size: 100%; /* To fill the dimensions of container (button), or */
+
+}
+
+
 .invoice-box{
         max-width:800px;
         margin:auto;
@@ -185,11 +197,14 @@ text-align: center;
 
 #box2 {
     background-color: #f3f3f3;
-    overflow: scroll;
+    left: 50%;
+        line-height: 50px;
+
 }
 
 #box3 {
     background-color: #f3f3f3;
+    overflow: scroll;
 }
 
 #box4 {
@@ -204,7 +219,7 @@ text-align: center;
 .forminput {
 
 background: white !important;
-height: 50px;
+height: 35px;
 font-size: 20px;
 
 }
@@ -221,13 +236,17 @@ font-size: 20px;
 
 .car-size {
   display: inline;
-  width: 40% !important;
+  width: 30% !important;
 }
 
 .imgWrapper{
 
 text-align: center;
 
+
+}
+
+#box2form{
 
 }
 
@@ -269,7 +288,7 @@ var cartype="";
 
 
 function Getservices(){
-
+services= "";
 if(document.getElementById("bodyshine").checked){
 services += "body waxing\n";
 }
@@ -299,12 +318,19 @@ services += "nano 2y\n";
 
 function fillInvoice(){
 
+
 var splitter = services;
-
-
 splitter = splitter.split("\n");
 
- for (var g = 0; g < 6 && splitter[g] != null ; g++) {
+
+
+for (var g = 0; g < 5 && splitter[g] != null ; g++) {
+
+  document.getElementById('service'+g).innerHTML = "";
+
+}
+
+ for (var g = 0; g < 5 && splitter[g] != null ; g++) {
 
    console.log(g);
    document.getElementById('service'+g).innerHTML = splitter[g];
@@ -318,23 +344,7 @@ splitter = splitter.split("\n");
 
   function passToPHP(json) {
 
-          Getservices();
 
-          console.log(json.Year);
-
-          $.ajax({
-        type: "POST",
-        dataType: "JSON",
-        url: "http://home-like.appengine.flow.ch/dazzle.php",
-        data: json,
-        success: function(data){
-            alert('Items sent');
-        },
-        error: function(e){
-            console.log(e.message);
-            console.log(e);
-        }
-});
 
 }
 
@@ -344,15 +354,13 @@ splitter = splitter.split("\n");
 
 
      json = {
-     "name":  document.getElementById("InputName").value ,
-     "email":  document.getElementById("InputEmail").value ,
+     "name":  document.getElementById("Name").value ,
+     "email":  document.getElementById("Email").value ,
      "location":  "" ,
-     "carmake":  document.getElementById("car-makes").value ,
-     "caryear":  document.getElementById("car-years").value ,
-     "carmodel":  document.getElementById("car-models").value ,
-     "carsize":       carsize   ,
-     "cartype":       cartype   ,
+     "carsize":       carsize  + " " + cartype ,
      "services":  ""+services+"",
+     "phone" : document.getElementById("phone").value,
+     "plate" : document.getElementById("carplate").value
     }
 
      var jsonStr = JSON.parse(JSON.stringify(json));
@@ -455,14 +463,14 @@ fillInvoice();
       passToPHP(json);
 
   }
-if(i<3){
+if(i<4){
 
     $("#box"+i).animate({
         left: '-50%'
     }, 500, function() {
         $("#box"+i).css('left', '150%');
          <!--$("#box"+i).appendTo('#container');-->
-        if(i < 3){
+        if(i < 4){
         i++;
       }
     });
@@ -471,7 +479,7 @@ if(i<3){
         left: '50%'
     }, 500);
 
-    if(i == 2) {
+    if(i == 3) {
 
     document.getElementById("Next").innerHTML = "Send";
 
@@ -482,6 +490,12 @@ if(i<3){
 });
 
 $('#Previous').click(function() {
+
+  if(document.getElementById("Next").innerHTML == "Send"){
+
+      document.getElementById("Next").innerHTML = "Next"
+      console.log("sdfs");
+  }
 
 if(i > 1){
 
@@ -543,13 +557,25 @@ if(this.id == "sedan"){
 
 
 
-}else {
+}
+
+if (this.id == "suv"){
 
   $("#carpic1").attr('src', './icons/suv.png');
 
   $("#carpic2").attr('src', './icons/suv-med.png');
 
   $("#carpic3").attr('src', './icons/suv-small.png');
+
+}
+
+if (this.id == "sport") {
+
+  $("#carpic1").attr('src', './icons/sport.png');
+
+  $("#carpic2").attr('src', './icons/sport-med.png');
+
+  $("#carpic3").attr('src', './icons/sport-small.png');
 
 }
 
@@ -595,58 +621,14 @@ cartype = this.id;
 <div id="box1form">
 
   <div class="form-group myform">
-    <label for="exampleInputEmail1" class="labels">Name</label>
-    <input type="email" class="form-control forminput" id="InputName" aria-describedby="emailHelp" placeholder="Enter Your Name ">
-    <label for="exampleInputEmail1" class="labels">Email address</label>
-    <input type="email" class="form-control forminput" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+    <label for="exampleInputEmail1" class="labels">الاسم</label>
+    <input type="email" class="form-control forminput" id="Name" aria-describedby="emailHelp" placeholder="Enter Your Name ">
+    <label for="exampleInputEmail1" class="labels">البريد الالكتروني</label>
+    <input type="email" class="form-control forminput" id="Email" aria-describedby="emailHelp" placeholder="Enter your email">
+    <label for="exampleInputEmail1" class="labels">رقم الجوال</label>
+    <input type="email" class="form-control forminput" id="phone" aria-describedby="emailHelp" placeholder="phone number">
   </div>
-<label for="exampleInputEmail1">Car Info</label>
 
-<div>
-
-  <div class="imgWrapper car-size">
-<button type="button" class="btn btn-default car-size selectcar" id="sedan"><img  src="./icons/sedan.png" alt="..." class="" ><p>سيدان</p></button>
-
-</div>
-
-
-    <div class="imgWrapper car-size">
-<button type="button" class="btn btn-default car-size selectcar" id="suv"><img  src="./icons/suv.png" alt="..." class="" ><p>جيب</p></button>
-
-</div>
-
-</div>
-
-
-<div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-default sizeSelector" id="big">
-
-<div class="imgWrapper">
-    <img  id="carpic1" src="./icons/sedan.png" alt="..." class=""  style="width: 80px; height: 40px;">
-    <p>كبيره</p>
-</div>
-
-
-  </a>
-  <a href="#" class="btn btn-default sizeSelector" id="medium">
-<div class="imgWrapper">
-    <img  id="carpic2" src="./icons/sedan-med.png" alt="..." class="" style="width: 80px; height: 40px;">
-    <p>وسط</p>
-</div>
-  </a>
-  <a href="#" class="btn btn-default sizeSelector" id="small">
-<div class="imgWrapper">
-    <img  id="carpic3" src="./icons/sedan-small.png" alt="..." class="" style="width: 80px; height: 40px;">
-    <p>صغيرة</p>
-</div>
-  </a>
-</div>
-
-
-
-
-
-<h1>Text Here</h1>
 
 
 
@@ -700,14 +682,82 @@ cartype = this.id;
 </div>
 
 
-
-
-
 <div id="box2" class="box" style="left: 150%;">
   <div>
 
 
   <div id="box2form">
+<label for="exampleInputEmail1">Car Info</label>
+
+
+<div>
+    <label for="exampleInputEmail1" class="labels">لوحه السيارة</label>
+    <input type="email" class="form-control forminput" id="carplate" aria-describedby="emailHelp" placeholder="car plate">
+  </div>
+
+
+<div>
+
+  <div class="imgWrapper car-size">
+<button type="button" class="btn btn-default car-size selectcar" id="sport"><img  src="./icons/sport.png" alt="..." class="cartypee" ><p>سبورت\كوبيه</p></button>
+
+</div>
+
+  <div class="imgWrapper car-size">
+<button type="button" class="btn btn-default car-size selectcar" id="sedan"><img  src="./icons/sedan.png" alt="..." class="cartypee" ><p>سيدان</p></button>
+
+</div>
+
+
+    <div class="imgWrapper car-size">
+<button type="button" class="btn btn-default car-size selectcar" id="suv"><img  src="./icons/suv.png" alt="..." class="cartypee" ><p>جيب</p></button>
+
+</div>
+
+</div>
+
+
+<div class="btn-group btn-group-justified">
+  <a href="#" class="btn btn-default sizeSelector" id="big">
+
+<div class="imgWrapper">
+    <img  id="carpic1" src="./icons/sedan.png" alt="..." class="cartypee"  style="width: 80px; height: 40px;">
+    <p>كبيره</p>
+</div>
+
+
+  </a>
+  <a href="#" class="btn btn-default sizeSelector" id="medium">
+<div class="imgWrapper">
+    <img  id="carpic2" src="./icons/sedan-med.png" alt="..." class="cartypee" style="width: 80px; height: 40px;">
+    <p>وسط</p>
+</div>
+  </a>
+  <a href="#" class="btn btn-default sizeSelector" id="small">
+<div class="imgWrapper">
+    <img  id="carpic3" src="./icons/sedan-small.png" alt="..." class="cartypee" style="width: 80px; height: 40px;">
+    <p>صغيرة</p>
+</div>
+  </a>
+</div>
+
+
+
+
+
+<h1>Text Here</h1>
+
+  </div>
+  </div>
+
+</div>
+
+
+<div id="box3" class="box" style="left: 150%;">
+  <div>
+
+
+  <div id="box3form">
 
     <div class="container">
     	<div class="row">
@@ -733,7 +783,7 @@ cartype = this.id;
 
 
 
-<div id="box3" class="box" style="left: 150%;overflow:scroll">
+<div id="box4" class="box" style="left: 150%;overflow:scroll">
 
 <!--
   <p id="CarMake"> Car Make + json.CarMake </p>
@@ -836,6 +886,26 @@ cartype = this.id;
 
             <tr class="item last">
                 <td id="service2">
+
+                </td>
+
+                <td id="price3">
+
+                </td>
+            </tr>
+
+            <tr class="item last">
+                <td id="service3">
+
+                </td>
+
+                <td id="price3">
+
+                </td>
+            </tr>
+
+            <tr class="item last">
+                <td id="service4">
 
                 </td>
 
