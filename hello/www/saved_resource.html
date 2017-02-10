@@ -70,6 +70,25 @@ button.mybtn {
 }
 
 
+.myheader{
+  position: absolute;
+  width: 100%;
+  z-index: 15;
+  background: #d62727;
+
+  line-height: 200%;
+  text-align: center;
+  color: white;
+  font-size: xx-large;
+}
+
+.ui-input-text{
+
+
+    margin-bottom: 10%;
+
+}
+
 .cartypee{
 
   width:90%;
@@ -184,7 +203,7 @@ text-align: center;
   line-height: 300px;
 
   text-align: center;
-
+      padding-top: 25%;
   left: 150%;
   top: 0px;
   margin-left: -50%;
@@ -205,10 +224,12 @@ text-align: center;
 #box3 {
     background-color: #f3f3f3;
     overflow: scroll;
+        padding-top: 15%;
 }
 
 #box4 {
     background-color: #e8e8e8;
+    padding-top: 15%;
 }
 
 #box5 {
@@ -219,8 +240,11 @@ text-align: center;
 .forminput {
 
 background: white !important;
-height: 35px;
+height: 80px;
 font-size: 20px;
+    text-align: center !important;
+    font-size: xx-large;
+
 
 }
 
@@ -284,17 +308,26 @@ var json;
 var services= "";
 var carsize="";
 var cartype="";
+var bodyshine= ""
+var interiorshine= ""
+var engineshine= ""
+var nano6m= ""
+var nano1y= ""
+var nano2y= ""
 
 
 
 function Getservices(){
+
+
+getPrice(cartype,carsize)
 services= "";
 if(document.getElementById("bodyshine").checked){
-services += "body waxing\n";
+services += "body waxing"+","+bodyshine+"\n";
 }
 
 if(document.getElementById("interiorshine").checked){
-services += "interior waxing\n";
+services += "interior waxing"+","+interiorshine+"\n";
 }
 
 if(document.getElementById("engineshine").checked){
@@ -317,6 +350,7 @@ services += "nano 2y\n";
 }
 
 function fillInvoice(){
+  var total = 0;
 
 
 var splitter = services;
@@ -324,26 +358,141 @@ splitter = splitter.split("\n");
 
 
 
+
 for (var g = 0; g < 5 && splitter[g] != null ; g++) {
 
   document.getElementById('service'+g).innerHTML = "";
+
 
 }
 
  for (var g = 0; g < 5 && splitter[g] != null ; g++) {
 
    console.log(g);
-   document.getElementById('service'+g).innerHTML = splitter[g];
-
+   var pricesplit = splitter[g].split(",");
+   document.getElementById('service'+g).innerHTML = pricesplit[0];
+   var f= g+1;
+   if(pricesplit[1] != null){
+   document.getElementById('price'+f).innerHTML = "SR "+pricesplit[1];
+   total = parseInt(total) + parseInt(pricesplit[1]);
+}
  }
 
-
+document.getElementById('total').innerHTML = "SR "+total;
 
 }
 
 
   function passToPHP(json) {
 
+
+
+}
+
+
+
+function getPrice(type,size) {
+
+ if(type == "sedan"){
+   if(size == "big"){
+     bodyshine= "350"
+     interiorshine= "300"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+   if( size =="medium"){
+     bodyshine= "300"
+     interiorshine= "250"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+   if(size == "small"){
+     bodyshine= "250"
+     interiorshine= "200"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+ }
+
+
+ if(type == "suv"){
+   if(size == "big"){
+     bodyshine= "400"
+     interiorshine= "350"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+   if( size =="medium"){
+     bodyshine= "350"
+     interiorshine= "300"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+   if(size == "small"){
+     bodyshine= "300"
+     interiorshine= "250"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+ }
+
+
+ if(type == "sport"){
+   if(size == "big"){
+
+   }
+   if( size =="medium"){
+
+   }
+   if(size == "small"){
+
+   }
+ }
+
+
+
+
+
+
+}
+
+
+function Header(i){
+
+  if(i == 1) {
+
+  document.getElementById("myheader").innerHTML = "معلومات عامه";
+
+  }
+
+  if(i == 2) {
+  document.getElementById("myheader").innerHTML = "معلومات سيارتك";
+
+
+  }
+
+  if(i == 3) {
+
+  document.getElementById("myheader").innerHTML = "خدمات";
+  }
+
+  if(i == 4) {
+
+  document.getElementById("myheader").innerHTML = "الفاتوره";
+
+  }
 
 
 }
@@ -472,6 +621,7 @@ if(i<4){
          <!--$("#box"+i).appendTo('#container');-->
         if(i < 4){
         i++;
+        Header(i);
       }
     });
 
@@ -479,11 +629,13 @@ if(i<4){
         left: '50%'
     }, 500);
 
+
     if(i == 3) {
 
     document.getElementById("Next").innerHTML = "Send";
-
     }
+
+
 }
 
 
@@ -497,6 +649,10 @@ $('#Previous').click(function() {
       console.log("sdfs");
   }
 
+
+
+
+
 if(i > 1){
 
 
@@ -504,6 +660,7 @@ if(i > 1){
       left: '150%'
   }, 500, function() {
 i--;
+Header(i);
 $("#box"+i).css('left', '50%');
 
 
@@ -512,11 +669,6 @@ $("#box"+i).css('left', '50%');
 
 
 }
-
-
-
-
-
 
 
 
@@ -621,12 +773,12 @@ cartype = this.id;
 <div id="box1form">
 
   <div class="form-group myform">
-    <label for="exampleInputEmail1" class="labels">الاسم</label>
-    <input type="email" class="form-control forminput" id="Name" aria-describedby="emailHelp" placeholder="Enter Your Name ">
-    <label for="exampleInputEmail1" class="labels">البريد الالكتروني</label>
-    <input type="email" class="form-control forminput" id="Email" aria-describedby="emailHelp" placeholder="Enter your email">
-    <label for="exampleInputEmail1" class="labels">رقم الجوال</label>
-    <input type="email" class="form-control forminput" id="phone" aria-describedby="emailHelp" placeholder="phone number">
+
+    <input type="email" class="form-control forminput" id="Name" aria-describedby="emailHelp" placeholder="الاسم">
+
+    <input type="email" class="form-control forminput" id="Email" aria-describedby="emailHelp" placeholder="البريد الالكتروني">
+
+    <input type="email" class="form-control forminput" id="phone" aria-describedby="emailHelp" placeholder="رقم الجوال">
   </div>
 
 
@@ -687,16 +839,18 @@ cartype = this.id;
 
 
   <div id="box2form">
-<label for="exampleInputEmail1">Car Info</label>
 
 
 <div>
-    <label for="exampleInputEmail1" class="labels">لوحه السيارة</label>
-    <input type="email" class="form-control forminput" id="carplate" aria-describedby="emailHelp" placeholder="car plate">
+
+    <input type="email" class="form-control forminput" id="carplate" aria-describedby="emailHelp" placeholder="لوحه السيارة">
   </div>
 
 
 <div>
+
+<label for="exampleInputEmail1" class="labels" style="font-size: xx-large;">حجم السياره ؟</label>
+
 
   <div class="imgWrapper car-size">
 <button type="button" class="btn btn-default car-size selectcar" id="sport"><img  src="./icons/sport.png" alt="..." class="cartypee" ><p>سبورت\كوبيه</p></button>
@@ -955,7 +1109,16 @@ cartype = this.id;
 </script>
 
 
+
+<div class="myheader">
+
+<p id="myheader">معلومات عامه</p>
+
+</div>
+
 <div class="btndiv">
+
+
 
 <button class="mybtn" id="Previous">Previous</button>
 <button class="mybtn" id="Next" onclick="StoreJson()">Next</button>
