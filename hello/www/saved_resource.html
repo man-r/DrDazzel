@@ -17,6 +17,7 @@
 
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="CSS/bootstrap.css">
+  <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
 
 
     <link rel="stylesheet" type="text/css" href="./normalize.css">
@@ -50,10 +51,17 @@ padding: 0px;
         background-color: #e8e8e8;
 }
 
+p{
+
+
+  font-family:'Cairo', sans-serif;
+}
+
+
 button.mybtn {
   font-family: Arial;
     color: #ffffff !important;
-    font-size: 20px;
+    font-size: 140%;
     background: #d62727 !important;
     padding: 10px 20px 10px 20px;
     text-decoration: none;
@@ -61,6 +69,7 @@ button.mybtn {
     display: inline;
     /* position: absolute; */
     float: left;
+    border-radius: 0px !important;
 }
 .btndiv{
   position: absolute;
@@ -84,7 +93,7 @@ button.mybtn {
 
 .ui-input-text{
 
-
+    font-family:'Cairo', sans-serif;
     margin-bottom: 10%;
 
 }
@@ -210,21 +219,27 @@ text-align: center;
 }
 
 #box1 {
-    background-color: #f3f3f3;
-    left: 50%;
+
+  background-color: #f3f3f3;
+  left: 50%;
+      line-height: 50px;
+
 }
 
 #box2 {
-    background-color: #f3f3f3;
-    left: 50%;
-        line-height: 50px;
+
+  background-color: #f3f3f3;
+  overflow: scroll;
+      padding-top: 15%;
+
 
 }
 
 #box3 {
-    background-color: #f3f3f3;
-    overflow: scroll;
-        padding-top: 15%;
+
+
+        background-color: #f3f3f3;
+        left: 50%;
 }
 
 #box4 {
@@ -252,8 +267,9 @@ font-size: 20px;
 .btn-group{
 
   padding-top: 5%;
-  width: 90%;
-  left: 5%;
+width: 94%;
+/* left: 3%; */
+padding: 6% 0% 6% 6%;
 
 
 }
@@ -277,6 +293,7 @@ text-align: center;
 .labels{
   padding-top: 5%;
       font-size: xx-large;
+      font-family:'Cairo', sans-serif;
 }
 
 .myselected{
@@ -473,19 +490,21 @@ function Header(i){
 
   if(i == 1) {
 
-  document.getElementById("myheader").innerHTML = "معلومات عامه";
+  document.getElementById("myheader").innerHTML = "معلومات سيارتك";
 
   }
 
   if(i == 2) {
-  document.getElementById("myheader").innerHTML = "معلومات سيارتك";
+
+  document.getElementById("myheader").innerHTML = "خدمات";
 
 
   }
 
   if(i == 3) {
 
-  document.getElementById("myheader").innerHTML = "خدمات";
+
+  document.getElementById("myheader").innerHTML = "معلومات عامه";
   }
 
   if(i == 4) {
@@ -514,9 +533,6 @@ function Header(i){
 
      var jsonStr = JSON.parse(JSON.stringify(json));
     console.log(jsonStr);
-    document.getElementById("Car-make-invoice").innerHTML = jsonStr.carmake;
-    document.getElementById("Car-year-invoice").innerHTML = jsonStr.caryear;
-    document.getElementById("Car-model-invoice").innerHTML = jsonStr.carmodel;
 
 }
 
@@ -766,11 +782,110 @@ cartype = this.id;
 
 
 <div id="box1" class="box" style="left: 50%;line-height: 60px;">
-
   <div>
 
 
-<div id="box1form">
+  <div id="box2form">
+
+
+  <div class="form-group myform">
+
+    <input type="email" class="form-control forminput" id="carplate" aria-describedby="emailHelp" placeholder="لوحه السيارة">
+  </div>
+
+
+  <div>
+
+  <label for="exampleInputEmail1" class="labels" style="font-size: xx-large;">حجم السياره ؟</label>
+
+
+  <div class="imgWrapper car-size">
+  <button type="button" class="btn btn-default car-size selectcar" id="sport"><img  src="./icons/sport.png" alt="..." class="cartypee" ><p>سبورت\كوبيه</p></button>
+
+  </div>
+
+  <div class="imgWrapper car-size">
+  <button type="button" class="btn btn-default car-size selectcar" id="sedan"><img  src="./icons/sedan.png" alt="..." class="cartypee" ><p>سيدان</p></button>
+
+  </div>
+
+
+    <div class="imgWrapper car-size">
+  <button type="button" class="btn btn-default car-size selectcar" id="suv"><img  src="./icons/suv.png" alt="..." class="cartypee" ><p>جيب</p></button>
+
+  </div>
+
+  </div>
+
+
+  <div class="btn-group btn-group-justified">
+  <a href="#" class="btn btn-default sizeSelector" id="big">
+
+  <div class="imgWrapper">
+    <img  id="carpic1" src="./icons/sedan.png" alt="..." class="cartypee"  style="width: 80px; height: 40px;">
+    <p>كبيره</p>
+  </div>
+
+
+  </a>
+  <a href="#" class="btn btn-default sizeSelector" id="medium">
+  <div class="imgWrapper">
+    <img  id="carpic2" src="./icons/sedan-med.png" alt="..." class="cartypee" style="width: 80px; height: 40px;">
+    <p>وسط</p>
+  </div>
+  </a>
+  <a href="#" class="btn btn-default sizeSelector" id="small">
+  <div class="imgWrapper">
+    <img  id="carpic3" src="./icons/sedan-small.png" alt="..." class="cartypee" style="width: 80px; height: 40px;">
+    <p>صغيرة</p>
+  </div>
+  </a>
+  </div>
+
+
+
+
+
+  <h1>Text Here</h1>
+
+  </div>
+  </div>
+
+</div>
+
+
+<div id="box2" class="box" style="left: 150%;">
+  <div>
+
+
+  <div id="box3form">
+
+    <div class="container">
+      <div class="row">
+        <form method="get">
+        <div class="form-group">
+        <div class="col-md-3" ><label id="fimg" class="btn imgbttn" ><img  src="./img/CarShine2.jpg" alt="..." class="img-thumbnail img-check" ><input type="checkbox" name="chk1" id="bodyshine" value="val1" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/car-interior-cleaning2.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk2" id="interiorshine" value="val2" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/engineClean2.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="engineshine" value="val3" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="nano6m" value="val4" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="nano1y" value="val3" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="nano2y" value="val4" class="hidden" autocomplete="off"></label></div>
+        </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+</div>
+
+
+<div id="box3" class="box" style="left: 150%;">
+  <div>
+
+
+  <div id="box1form">
 
   <div class="form-group myform">
 
@@ -828,105 +943,6 @@ cartype = this.id;
     </div> -->
 
 
-
-</div>
-</div>
-</div>
-
-
-<div id="box2" class="box" style="left: 150%;">
-  <div>
-
-
-  <div id="box2form">
-
-
-<div>
-
-    <input type="email" class="form-control forminput" id="carplate" aria-describedby="emailHelp" placeholder="لوحه السيارة">
-  </div>
-
-
-<div>
-
-<label for="exampleInputEmail1" class="labels" style="font-size: xx-large;">حجم السياره ؟</label>
-
-
-  <div class="imgWrapper car-size">
-<button type="button" class="btn btn-default car-size selectcar" id="sport"><img  src="./icons/sport.png" alt="..." class="cartypee" ><p>سبورت\كوبيه</p></button>
-
-</div>
-
-  <div class="imgWrapper car-size">
-<button type="button" class="btn btn-default car-size selectcar" id="sedan"><img  src="./icons/sedan.png" alt="..." class="cartypee" ><p>سيدان</p></button>
-
-</div>
-
-
-    <div class="imgWrapper car-size">
-<button type="button" class="btn btn-default car-size selectcar" id="suv"><img  src="./icons/suv.png" alt="..." class="cartypee" ><p>جيب</p></button>
-
-</div>
-
-</div>
-
-
-<div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-default sizeSelector" id="big">
-
-<div class="imgWrapper">
-    <img  id="carpic1" src="./icons/sedan.png" alt="..." class="cartypee"  style="width: 80px; height: 40px;">
-    <p>كبيره</p>
-</div>
-
-
-  </a>
-  <a href="#" class="btn btn-default sizeSelector" id="medium">
-<div class="imgWrapper">
-    <img  id="carpic2" src="./icons/sedan-med.png" alt="..." class="cartypee" style="width: 80px; height: 40px;">
-    <p>وسط</p>
-</div>
-  </a>
-  <a href="#" class="btn btn-default sizeSelector" id="small">
-<div class="imgWrapper">
-    <img  id="carpic3" src="./icons/sedan-small.png" alt="..." class="cartypee" style="width: 80px; height: 40px;">
-    <p>صغيرة</p>
-</div>
-  </a>
-</div>
-
-
-
-
-
-<h1>Text Here</h1>
-
-  </div>
-  </div>
-
-</div>
-
-
-<div id="box3" class="box" style="left: 150%;">
-  <div>
-
-
-  <div id="box3form">
-
-    <div class="container">
-    	<div class="row">
-    		<form method="get">
-    		<div class="form-group">
-    		<div class="col-md-3" ><label id="fimg" class="btn imgbttn" ><img  src="./img/CarShine2.jpg" alt="..." class="img-thumbnail img-check" ><input type="checkbox" name="chk1" id="bodyshine" value="val1" class="hidden" autocomplete="off"></label></div>
-    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/car-interior-cleaning2.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk2" id="interiorshine" value="val2" class="hidden" autocomplete="off"></label></div>
-    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/engineClean2.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="engineshine" value="val3" class="hidden" autocomplete="off"></label></div>
-    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="nano6m" value="val4" class="hidden" autocomplete="off"></label></div>
-        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="nano1y" value="val3" class="hidden" autocomplete="off"></label></div>
-        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="nano2y" value="val4" class="hidden" autocomplete="off"></label></div>
-        </div>
-    		</form>
-    	</div>
-    </div>
 
   </div>
   </div>
@@ -1112,7 +1128,7 @@ cartype = this.id;
 
 <div class="myheader">
 
-<p id="myheader">معلومات عامه</p>
+<p id="myheader" style="font-family:'Cairo', sans-serif;" >معلومات عامه</p>
 
 </div>
 
