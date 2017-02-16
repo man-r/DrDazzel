@@ -794,7 +794,7 @@ cartype = this.id;
 
   <div class="form-group myform">
 
-    <input type="email" class="form-control forminput" id="carplate" aria-describedby="emailHelp" placeholder="لوحه السيارة">
+    <input type="text" class="form-control forminput" id="carplate" maxlength="8" style="text-transform:uppercase" aria-describedby="emailHelp" placeholder="لوحه السيارة">
   </div>
 
 
@@ -893,11 +893,11 @@ cartype = this.id;
 
   <div class="form-group myform">
 
-    <input type="email" class="form-control forminput" id="Name" aria-describedby="emailHelp" placeholder="الاسم">
+    <input type="text" class="form-control forminput" id="Name" maxlength="30" aria-describedby="emailHelp" placeholder="الاسم">
 
-    <input type="email" class="form-control forminput" id="Email" aria-describedby="emailHelp" placeholder="البريد الالكتروني">
+    <input type="email" class="form-control forminput" id="Email" pattern="[^ @]*@[^ @]*" aria-describedby="emailHelp" placeholder="البريد الالكتروني">
 
-    <input type="email" class="form-control forminput" id="phone" aria-describedby="emailHelp" placeholder="رقم الجوال">
+    <input type="text" class="form-control forminput" id="phone" maxlength="10" aria-describedby="emailHelp" placeholder="رقم الجوال">
   </div>
 
 
