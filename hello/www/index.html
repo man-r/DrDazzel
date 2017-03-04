@@ -28,12 +28,12 @@ background-size: cover;
 }
 #CoverDiv {
   position: absolute;
-width: 50%;
-height: 200px;
-z-index: 15;
-top: 30%;
-left: 50%;
-margin: -100px 0 0 -253px;
+    width: 90%;
+    height: 200px;
+    z-index: 15;
+    top: 42%;
+    left: 32%;
+    margin: -100px 0 0 -253px;
 
 }
 
@@ -51,17 +51,17 @@ width: 100%;
 
 </style>
 <script>
-var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
   xmlhttp.open("POST", "http://home-like.appengine.flow.ch/dazzle.php");
   xmlhttp.setRequestHeader("Content-Type", "application/json");
-  xmlhttp.onreadystatechange = function () { 
+  xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         console.log(xmlhttp.responseText)
     }
 }
   xmlhttp.send(JSON.stringify({name:"John Rambo", time:"2pm"}));
 
-function start(){ 
+function start(){
   window.location.href = "Page2.html";
 
 
@@ -72,7 +72,7 @@ function start(){
 <body >
 
   <Div id="CoverDiv">
-    <h1 id="Cover">Dazzle</h1>
+    <img src="./img/logo.png" style="width:100%"></img>
   </div>
 
 <Div id="startBtnDiv">

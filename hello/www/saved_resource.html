@@ -332,7 +332,11 @@ var nano6m= ""
 var nano1y= ""
 var nano2y= ""
 
+function changed(ID){
 
+  document.getElementById(ID).setAttribute("name", "true");
+
+}
 
 function Getservices(){
 
@@ -486,6 +490,27 @@ function getPrice(type,size) {
 }
 
 
+function getdate(){
+
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+
+  if(dd<10) {
+      dd='0'+dd
+  }
+
+  if(mm<10) {
+      mm='0'+mm
+  }
+
+  today = mm+'/'+dd+'/'+yyyy;
+  document.getElementById('date').innerHTML = "Created: " + today;
+
+}
+
+
 function Header(i){
 
   if(i == 1) {
@@ -533,9 +558,7 @@ function Header(i){
 
      var jsonStr = JSON.parse(JSON.stringify(json));
     console.log(jsonStr);
-
-
-
+    getdate();
 
 }
 
@@ -624,6 +647,9 @@ $(document).on("pagecreate","#pageone",function(){
 $(window).load(function(){
   var i = 1;
 $('#Next').on( "click",function() {
+
+if (document.getElementById("carplate").name == "true"){
+
 Getservices();
 fillInvoice();
   if(document.getElementById("Next").innerHTML == "Send"){
@@ -658,6 +684,13 @@ if(i<4){
 
 }
 
+
+
+}else {
+
+  alert("اكمل البيانات المطلوبه");
+
+}
 
 });
 
@@ -794,7 +827,7 @@ cartype = this.id;
 
   <div class="form-group myform">
 
-    <input type="text" class="form-control forminput" id="carplate" maxlength="8" style="text-transform:uppercase" aria-describedby="emailHelp" placeholder="لوحه السيارة">
+    <input type="text" class="form-control forminput" name="false" onchange="changed(this.id)" id="carplate" maxlength="8" style="text-transform:uppercase" aria-describedby="emailHelp" placeholder="لوحه السيارة">
   </div>
 
 
@@ -995,13 +1028,12 @@ cartype = this.id;
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;">
+                                <img src="./img/logo-BOth.png" style="width:100%; max-width:300px;">
                             </td>
 
                             <td>
                                 Invoice #: 123<br>
-                                Created: January 1, 2015<br>
-                                Due: February 1, 2015
+                                 <p id="date"></p> <br>
                             </td>
                         </tr>
                     </table>
