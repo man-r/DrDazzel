@@ -648,7 +648,10 @@ $(window).load(function(){
   var i = 1;
 $('#Next').on( "click",function() {
 
-if (document.getElementById("carplate").name == "true"){
+if ( i==1
+&& document.getElementById("carplate").name == "true"
+&& document.getElementById("carsizechange").getAttribute("name") == "true"
+|| i > 1){
 
 Getservices();
 fillInvoice();
@@ -831,7 +834,7 @@ cartype = this.id;
   </div>
 
 
-  <div>
+  <div name="false" onclick="changed(this.id)" id="carsizechange" >
 
   <label for="exampleInputEmail1" class="labels" style="font-size: xx-large;">حجم السياره ؟</label>
 
