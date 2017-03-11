@@ -406,7 +406,26 @@ document.getElementById('total').innerHTML = "SR "+total;
 
   function passToPHP(json) {
 
-window.location.href = "thankyou.html";
+    Getservices();
+
+console.log(json.Year);
+
+$.ajax({
+type: "POST",
+dataType: "JSON",
+url: "http://drlame3.com/dazzle.php",
+data: json,
+success: function(data){
+  alert('Items sent');
+},
+error: function(e){
+  console.log(e.message);
+  console.log(e);
+}
+});
+
+
+//window.location.href = "thankyou.html";
 
 }
 
