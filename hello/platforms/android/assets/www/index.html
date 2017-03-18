@@ -9,7 +9,7 @@
 
 body {
 
-background-image:url(./Pics/buffer22.png);
+background-image:url(./Pics/maxresdefault.jpg);
 background-position: center;
 background-size: cover;
 
@@ -18,23 +18,19 @@ background-size: cover;
 
 #startBtnDiv {
   position: absolute;
-    width: 300px;
-    height: 200px;
-    z-index: 15;
-    top: 80%;
-    left: 50%;
-    margin: -100px 0 0 -150px;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 80%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
 
 }
 #CoverDiv {
   position: absolute;
-width: 50%;
-height: 200px;
-z-index: 15;
-top: 30%;
-left: 50%;
-margin: -100px 0 0 -253px;
-
+  top: 20%;
+  width: 100%;
+  margin: auto;
 }
 
 #startBtn {
@@ -51,17 +47,23 @@ width: 100%;
 
 </style>
 <script>
-function HH(){ window.location.href = "Page2.html";}
+
+function start(){
+  window.location.href = "Page2.html";
+
+
+}
+
 </script>
 
 <body >
 
   <Div id="CoverDiv">
-    <h1 id="Cover">Dazzle</h1>
+    <img src="./img/logo-En.png" style="width:100%"></img>
+    <img src="./img/sonax.png" style="width:30%"></img>
   </div>
-
 <Div id="startBtnDiv">
-  <button class="btn btn-danger" id="startBtn" type="button" onclick="HH()" style="zoom:3;">Find Nearby</button>
+  <button class="btn btn-danger" id="startBtn" type="button" onclick="start()" style="zoom:3;">Find Nearby</button>
 </div>
 
 </body>

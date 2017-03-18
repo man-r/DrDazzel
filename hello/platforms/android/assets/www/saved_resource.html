@@ -17,6 +17,7 @@
 
   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="CSS/bootstrap.css">
+  <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
 
 
     <link rel="stylesheet" type="text/css" href="./normalize.css">
@@ -47,12 +48,20 @@ padding: 0px;
 
     body {
     padding: 0px;
+        background-color: #e8e8e8;
 }
+
+p{
+
+
+  font-family:'Cairo', sans-serif;
+}
+
 
 button.mybtn {
   font-family: Arial;
     color: #ffffff !important;
-    font-size: 20px;
+    font-size: 140%;
     background: #d62727 !important;
     padding: 10px 20px 10px 20px;
     text-decoration: none;
@@ -60,6 +69,7 @@ button.mybtn {
     display: inline;
     /* position: absolute; */
     float: left;
+    border-radius: 0px !important;
 }
 .btndiv{
   position: absolute;
@@ -67,6 +77,37 @@ button.mybtn {
   bottom: -5px;
   z-index: 15;
 }
+
+
+.myheader{
+  position: absolute;
+  width: 100%;
+  z-index: 15;
+  background: #d62727;
+
+  line-height: 200%;
+  text-align: center;
+  color: white;
+  font-size: xx-large;
+}
+
+.ui-input-text{
+
+    font-family:'Cairo', sans-serif;
+    margin-bottom: 10%;
+
+}
+
+.cartypee{
+
+  width:90%;
+    height:90%;
+    border: 0;
+  background-size: 100%; /* To fill the dimensions of container (button), or */
+
+}
+
+
 .invoice-box{
         max-width:800px;
         margin:auto;
@@ -171,32 +212,105 @@ text-align: center;
   line-height: 300px;
 
   text-align: center;
-
+      padding-top: 25%;
   left: 150%;
   top: 0px;
   margin-left: -50%;
 }
 
 #box1 {
-    background-color: #e8e8e8;
-    left: 50%;
+
+  background-color: #f3f3f3;
+  left: 50%;
+      line-height: 50px;
+
 }
 
 #box2 {
-    background-color: #e8e8e8;
-    overflow: scroll;
+
+  background-color: #f3f3f3;
+  overflow: scroll;
+      padding-top: 15%;
+
+
 }
 
 #box3 {
-    background-color: #e8e8e8;
+
+
+        background-color: #f3f3f3;
+        left: 50%;
 }
 
 #box4 {
     background-color: #e8e8e8;
+    padding-top: 15%;
 }
 
 #box5 {
     background-color: #e8e8e8;
+}
+
+
+.forminput {
+
+background: white !important;
+height: 80px;
+font-size: 20px;
+    text-align: center !important;
+    font-size: xx-large;
+
+
+}
+
+
+.btn-group{
+
+  padding-top: 5%;
+width: 94%;
+/* left: 3%; */
+padding: 6% 0% 6% 6%;
+
+
+}
+
+.car-size {
+  display: inline;
+  width: 30% !important;
+}
+
+.imgWrapper{
+
+text-align: center;
+
+
+}
+
+#box2form{
+
+}
+
+.labels{
+  padding-top: 5%;
+      font-size: xx-large;
+      font-family:'Cairo', sans-serif;
+}
+
+.myselected{
+
+background-color: #dcdcdc !important;
+border-color: #428bca !important;
+
+}
+
+.myform {
+    margin-bottom: 15px;
+    width: 95%;
+    /* align-self: center; */
+    /* position: absolute; */
+    padding: 0px 0px 0px 20px;
+    line-height: 20px;
+    padding: 0% 0px 0px 20px;
 }
 
   </style>
@@ -207,30 +321,276 @@ text-align: center;
 
 <script type="text/javascript">//<![CDATA[
 
+var json;
+var services= "";
+var carsize="";
+var cartype="";
+var bodyshine= ""
+var interiorshine= ""
+var engineshine= ""
+var nano6m= ""
+var nano1y= ""
+var nano2y= ""
+
+function changed(ID){
+
+  document.getElementById(ID).setAttribute("name", "true");
+
+}
+
+function Getservices(){
+
+
+getPrice(cartype,carsize)
+services= "";
+if(document.getElementById("bodyshine").checked){
+services += "body waxing"+","+bodyshine+"\n";
+}
+
+if(document.getElementById("interiorshine").checked){
+services += "interior waxing"+","+interiorshine+"\n";
+}
+
+if(document.getElementById("engineshine").checked){
+services += "engine waxing\n";
+}
+
+if(document.getElementById("nano6m").checked){
+services += "nano 6m\n";
+}
+
+if(document.getElementById("nano1y").checked){
+services += "nano 1y\n";
+}
+
+if(document.getElementById("nano2y").checked){
+services += "nano 2y\n";
+}
+
+
+}
+
+function fillInvoice(){
+  var total = 0;
+
+
+var splitter = services;
+splitter = splitter.split("\n");
+
+
+
+
+for (var g = 0; g < 5 && splitter[g] != null ; g++) {
+
+  document.getElementById('service'+g).innerHTML = "";
+
+
+}
+
+ for (var g = 0; g < 5 && splitter[g] != null ; g++) {
+
+   console.log(g);
+   var pricesplit = splitter[g].split(",");
+   document.getElementById('service'+g).innerHTML = pricesplit[0];
+   var f= g+1;
+   if(pricesplit[1] != null){
+   document.getElementById('price'+f).innerHTML = "SR "+pricesplit[1];
+   total = parseInt(total) + parseInt(pricesplit[1]);
+}
+ }
+
+document.getElementById('total').innerHTML = "SR "+total;
+
+}
+
+
+  function passToPHP(json) {
+
+    Getservices();
+
+console.log(json.Year);
+
+$.ajax({
+type: "POST",
+dataType: "JSON",
+url: "http://drdazzel.com/dazzle.php",
+data: json,
+success: function(data){
+  alert('Items sent');
+},
+error: function(e){
+  console.log(e.message);
+  console.log(e);
+}
+});
+
+
+//window.location.href = "thankyou.html";
+
+}
+
+
+
+function getPrice(type,size) {
+
+ if(type == "sedan"){
+   if(size == "big"){
+     bodyshine= "350"
+     interiorshine= "300"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+   if( size =="medium"){
+     bodyshine= "300"
+     interiorshine= "250"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+   if(size == "small"){
+     bodyshine= "250"
+     interiorshine= "200"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+ }
+
+
+ if(type == "suv"){
+   if(size == "big"){
+     bodyshine= "400"
+     interiorshine= "350"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+   if( size =="medium"){
+     bodyshine= "350"
+     interiorshine= "300"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+   if(size == "small"){
+     bodyshine= "300"
+     interiorshine= "250"
+     engineshine= ""
+     nano6m= ""
+     nano1y= ""
+     nano2y= ""
+   }
+ }
+
+
+ if(type == "sport"){
+   if(size == "big"){
+
+   }
+   if( size =="medium"){
+
+   }
+   if(size == "small"){
+
+   }
+ }
+
+
+
+
+
+
+}
+
+
+function getdate(){
+
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+
+  if(dd<10) {
+      dd='0'+dd
+  }
+
+  if(mm<10) {
+      mm='0'+mm
+  }
+
+  today = mm+'/'+dd+'/'+yyyy;
+  document.getElementById('date').innerHTML = "Created: " + today;
+
+}
+
+
+function Header(i){
+
+  if(i == 1) {
+
+  document.getElementById("myheader").innerHTML = "معلومات سيارتك";
+
+  }
+
+  if(i == 2) {
+
+  document.getElementById("myheader").innerHTML = "خدمات";
+
+
+  }
+
+  if(i == 3) {
+
+
+  document.getElementById("myheader").innerHTML = "معلومات عامه";
+  }
+
+  if(i == 4) {
+
+  document.getElementById("myheader").innerHTML = "الفاتوره";
+
+  }
+
+
+}
+
+
+
   function StoreJson(){
 
-    var json = {
-     "CarMake":  document.getElementById("car-makes").value ,
-     "Year":  document.getElementById("car-years").value ,
-     "CarModel":  document.getElementById("car-models").value ,
-     "CarSize":  "small" ,
 
+     json = {
+     "name":  document.getElementById("Name").value ,
+     "email":  document.getElementById("Email").value ,
+     "location":  "" ,
+     "carsize":       carsize  + " " + cartype ,
+     "services":  ""+services+"",
+     "phone" : document.getElementById("phone").value,
+     "plate" : document.getElementById("carplate").value
     }
 
      var jsonStr = JSON.parse(JSON.stringify(json));
     console.log(jsonStr);
-    alert(jsonStr.CarMake);
-    document.getElementById("Car-make-invoice").innerHTML = jsonStr.CarMake;
-    document.getElementById("Car-year-invoice").innerHTML = jsonStr.Year;
-    document.getElementById("Car-model-invoice").innerHTML = jsonStr.CarModel;
+    getdate();
 
 }
 
-$(document).ready(function() {
-  $("#fimg").click(function(){
-  $(this).toggleClass("check");
+
+
+$(document).ready(function () {
+    $(".img-check").on('click touchend', function () {
+$(this).toggleClass("check");
+    });
+
 });
-});
+
+
 
 
 function populate() {
@@ -296,36 +656,100 @@ function populate() {
   });
 }
 
+
+$(document).on("pagecreate","#pageone",function(){
+  $("box1").on("swipeleft",function(){
+    alert("You swiped left!");
+  });
+});
+
 $(window).load(function(){
   var i = 1;
-$('#Next').click(function() {
-if(i<3){
+$('#Next').on( "click",function() {
+
+if ( i==1
+&& document.getElementById("carplate").name == "true"
+&& document.getElementById("carsizechange").getAttribute("name") == "true"
+|| i > 1
+&& (document.getElementById("CarShine2").classList.contains('check')
+|| document.getElementById("car-interior-cleaning2").classList.contains('check')
+|| document.getElementById("engineClean2").classList.contains('check')
+|| document.getElementById("nano2years").classList.contains('check')
+|| document.getElementById("nano2years2").classList.contains('check')
+|| document.getElementById("nano2years3").classList.contains('check'))
+){
+
+Getservices();
+fillInvoice();
+  if(document.getElementById("Next").innerHTML == "Send"){
+
+      passToPHP(json);
+
+  }
+if(i<4){
 
     $("#box"+i).animate({
         left: '-50%'
     }, 500, function() {
         $("#box"+i).css('left', '150%');
-        $("#box"+i).appendTo('#container');
-        if(i == 3){
-
-         i = 1;
-
-       }else {
-
-         i++;
-       }
-
+         <!--$("#box"+i).appendTo('#container');-->
+        if(i < 4){
+        i++;
+        Header(i);
+      }
     });
 
     $("#box"+i).next().animate({
         left: '50%'
     }, 500);
 
-    if(i == 2) {
+
+    if(i == 3) {
 
     document.getElementById("Next").innerHTML = "Send";
 
     }
+
+
+}
+
+
+
+}else {
+
+  alert("اكمل البيانات المطلوبه");
+
+}
+
+});
+
+$('#Previous').click(function() {
+
+  if(document.getElementById("Next").innerHTML == "Send"){
+
+      document.getElementById("Next").innerHTML = "Next"
+      console.log("sdfs");
+  }
+
+
+
+
+
+if(i > 1){
+
+
+  $("#box"+i).animate({
+      left: '150%'
+  }, 500, function() {
+i--;
+Header(i);
+$("#box"+i).css('left', '50%');
+
+
+  });
+
+
+
 }
 
 
@@ -333,7 +757,86 @@ if(i<3){
 });
 
 
+$('.sizeSelector').on('click touchend',function() {
+
+
+if ( $(this).hasClass('myselected') ) {
+
+$('.sizeSelector').removeClass('myselected');
+$(this).addClass('myselected');
+
+carsize = this.id;
+
+}else {
+
+$('.sizeSelector').removeClass('myselected');
+$(this).addClass('myselected');
+carsize = this.id;
+
+}
+
+});
+
+
+$('.selectcar').on('click touchend',function() {
+
+
+if(this.id == "sedan"){
+
+  $("#carpic1").attr('src', './icons/sedan.png');
+
+  $("#carpic2").attr('src', './icons/sedan-med.png');
+
+  $("#carpic3").attr('src', './icons/sedan-small.png');
+
+
+
+}
+
+if (this.id == "suv"){
+
+  $("#carpic1").attr('src', './icons/suv.png');
+
+  $("#carpic2").attr('src', './icons/suv-med.png');
+
+  $("#carpic3").attr('src', './icons/suv-small.png');
+
+}
+
+if (this.id == "sport") {
+
+  $("#carpic1").attr('src', './icons/sport.png');
+
+  $("#carpic2").attr('src', './icons/sport-med.png');
+
+  $("#carpic3").attr('src', './icons/sport-small.png');
+
+}
+
+
+if ( $(this).hasClass('myselected') ) {
+
+$('.selectcar').removeClass('myselected');
+$(this).addClass('myselected');
+cartype = this.id;
+
+}else {
+
+$('.selectcar').removeClass('myselected');
+$(this).addClass('myselected');
+cartype = this.id;
+
+}
+
+});
+
 });//]]>
+
+
+
+
+
+
 
 </script>
 
@@ -344,14 +847,125 @@ if(i<3){
   <div id="container">
 
 
-<div id="box1" class="box" style="left: 50%;">
-
+<div id="box1" class="box" style="left: 50%;line-height: 60px;">
   <div>
 
 
-<div id="box1form">
+  <div id="box2form">
 
-    <div data-role="main" class="ui-content">
+
+  <div class="form-group myform">
+
+    <input type="text" class="form-control forminput" name="false" onchange="changed(this.id)" id="carplate" maxlength="8" style="text-transform:uppercase" aria-describedby="emailHelp" placeholder="لوحه السيارة">
+  </div>
+
+
+  <div name="false" onclick="changed(this.id)" id="carsizechange" >
+
+  <label for="exampleInputEmail1" class="labels" style="font-size: xx-large;">حجم السياره ؟</label>
+
+
+  <div class="imgWrapper car-size">
+  <button type="button" class="btn btn-default car-size selectcar" id="sport"><img  src="./icons/sport.png" alt="..." class="cartypee" ><p>سبورت\كوبيه</p></button>
+
+  </div>
+
+  <div class="imgWrapper car-size">
+  <button type="button" class="btn btn-default car-size selectcar" id="sedan"><img  src="./icons/sedan.png" alt="..." class="cartypee" ><p>سيدان</p></button>
+
+  </div>
+
+
+    <div class="imgWrapper car-size">
+  <button type="button" class="btn btn-default car-size selectcar" id="suv"><img  src="./icons/suv.png" alt="..." class="cartypee" ><p>جيب</p></button>
+
+  </div>
+
+  </div>
+
+
+  <div class="btn-group btn-group-justified">
+  <a href="#" class="btn btn-default sizeSelector" id="big">
+
+  <div class="imgWrapper">
+    <img  id="carpic1" src="./icons/sedan.png" alt="..." class="cartypee"  style="width: 80px; height: 40px;">
+    <p>كبيره</p>
+  </div>
+
+
+  </a>
+  <a href="#" class="btn btn-default sizeSelector" id="medium">
+  <div class="imgWrapper">
+    <img  id="carpic2" src="./icons/sedan-med.png" alt="..." class="cartypee" style="width: 80px; height: 40px;">
+    <p>وسط</p>
+  </div>
+  </a>
+  <a href="#" class="btn btn-default sizeSelector" id="small">
+  <div class="imgWrapper">
+    <img  id="carpic3" src="./icons/sedan-small.png" alt="..." class="cartypee" style="width: 80px; height: 40px;">
+    <p>صغيرة</p>
+  </div>
+  </a>
+  </div>
+
+
+
+
+
+  <!-- <h1>Text Here</h1> -->
+
+  </div>
+  </div>
+
+</div>
+
+
+<div id="box2" class="box" style="left: 150%;">
+  <div>
+
+
+  <div id="box3form">
+
+    <div class="container">
+      <div class="row">
+        <form method="get">
+        <div class="form-group">
+        <div class="col-md-3" ><label id="fimg" class="btn imgbttn" ><img  src="./img/CarShine2.jpg" id="CarShine2" alt="..." class="img-thumbnail img-check" ><input type="checkbox" name="chk1" id="bodyshine" value="val1" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/car-interior-cleaning2.jpg" id="car-interior-cleaning2" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk2" id="interiorshine" value="val2" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/engineClean2.jpg" id="engineClean2" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="engineshine" value="val3" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" id="nano2years" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="nano6m" value="val4" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" id="nano2years2" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="nano1y" value="val3" class="hidden" autocomplete="off"></label></div>
+        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" id="nano2years3" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="nano2y" value="val4" class="hidden" autocomplete="off"></label></div>
+        </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+</div>
+
+
+<div id="box3" class="box" style="left: 150%;">
+  <div>
+
+
+  <div id="box1form">
+
+  <div class="form-group myform">
+
+    <input type="text" class="form-control forminput" id="Name" maxlength="30" aria-describedby="emailHelp" placeholder="الاسم">
+
+    <input type="email" class="form-control forminput" id="Email" pattern="[^ @]*@[^ @]*" aria-describedby="emailHelp" placeholder="البريد الالكتروني">
+
+    <input type="text" class="form-control forminput" id="phone" maxlength="10" aria-describedby="emailHelp" placeholder="رقم الجوال">
+  </div>
+
+
+
+
+    <div data-role="main" class="ui-content" style="display:none;">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
           <select name="car-years" id="car-years">
@@ -361,7 +975,7 @@ if(i<3){
       </form>
     </div>
 
-    <div data-role="main" class="ui-content">
+    <div data-role="main" class="ui-content" style="display:none;">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
 
@@ -372,7 +986,7 @@ if(i<3){
       </form>
     </div>
 
-    <div data-role="main" class="ui-content">
+    <div data-role="main" class="ui-content" style="display:none;">
       <form method="post" action="demoform.asp">
         <fieldset class="ui-field-contain">
 
@@ -396,35 +1010,6 @@ if(i<3){
 
 
 
-</div>
-</div>
-</div>
-
-
-
-
-
-<div id="box2" class="box" style="left: 150%;">
-  <div>
-
-
-  <div id="box2form">
-
-    <div class="container">
-    	<div class="row">
-    		<form method="get">
-    		<div class="form-group">
-    		<div class="col-md-3"><label id="fimg" class="btn imgbttn"><img  src="./img/CarShine.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk1" id="item4" value="val1" class="hidden" autocomplete="off"></label></div>
-    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/car-interior-cleaning.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk2" id="item4" value="val2" class="hidden" autocomplete="off"></label></div>
-    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/engineClean.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="item4" value="val3" class="hidden" autocomplete="off"></label></div>
-    		<div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="item4" value="val4" class="hidden" autocomplete="off"></label></div>
-        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk3" id="item4" value="val3" class="hidden" autocomplete="off"></label></div>
-        <div class="col-md-3"><label class="btn imgbttn"><img src="./img/nano2years.jpg" alt="..." class="img-thumbnail img-check"><input type="checkbox" name="chk4" id="item4" value="val4" class="hidden" autocomplete="off"></label></div>
-        </div>
-    		</form>
-    	</div>
-    </div>
-
   </div>
   </div>
 
@@ -434,7 +1019,7 @@ if(i<3){
 
 
 
-<div id="box3" class="box" style="left: 150%;overflow:scroll">
+<div id="box4" class="box" style="left: 150%;overflow:scroll">
 
 <!--
   <p id="CarMake"> Car Make + json.CarMake </p>
@@ -472,13 +1057,12 @@ if(i<3){
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;">
+                                <img src="./img/logo-BOth.png" style="width:100%; max-width:300px;">
                             </td>
 
                             <td>
                                 Invoice #: 123<br>
-                                Created: January 1, 2015<br>
-                                Due: February 1, 2015
+                                 <p id="date"></p> <br>
                             </td>
                         </tr>
                     </table>
@@ -516,40 +1100,60 @@ if(i<3){
             </tr>
 
             <tr class="item">
-                <td>
-                    Website design
+                <td id="service0">
+
                 </td>
 
-                <td>
-                    $300.00
+                <td id="price1">
+
                 </td>
             </tr>
 
             <tr class="item">
-                <td>
-                    Hosting (3 months)
+                <td id="service1">
+
                 </td>
 
-                <td>
-                    $75.00
+                <td id="price2">
+
                 </td>
             </tr>
 
             <tr class="item last">
-                <td>
-                    Domain name (1 year)
+                <td id="service2">
+
                 </td>
 
-                <td>
-                    $10.00
+                <td id="price3">
+
+                </td>
+            </tr>
+
+            <tr class="item last">
+                <td id="service3">
+
+                </td>
+
+                <td id="price3">
+
+                </td>
+            </tr>
+
+            <tr class="item last">
+                <td id="service4">
+
+                </td>
+
+                <td id="price3">
+
                 </td>
             </tr>
 
             <tr class="total">
                 <td></td>
 
-                <td>
-                   Total: $385.00
+                <td id="total">
+
                 </td>
             </tr>
         </table>
@@ -586,7 +1190,16 @@ if(i<3){
 </script>
 
 
+
+<div class="myheader">
+
+<p id="myheader" style="font-family:'Cairo', sans-serif;" >معلومات سيارتك </p>
+
+</div>
+
 <div class="btndiv">
+
+
 
 <button class="mybtn" id="Previous">Previous</button>
 <button class="mybtn" id="Next" onclick="StoreJson()">Next</button>

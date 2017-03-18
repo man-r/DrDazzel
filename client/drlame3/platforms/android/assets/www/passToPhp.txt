@@ -1,0 +1,17 @@
+Getservices();
+
+console.log(json.Year);
+
+$.ajax({
+type: "POST",
+dataType: "JSON",
+url: "http://home-like.appengine.flow.ch/dazzle.php",
+data: json,
+success: function(data){
+  alert('Items sent');
+},
+error: function(e){
+  console.log(e.message);
+  console.log(e);
+}
+});
