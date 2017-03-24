@@ -23,7 +23,7 @@ $services = $_POST['services'];
 // Create the email and send the message
 $to = 'man.rs85@gmail.com'; // Add your email address inbetween the '' replacing
 $email_subject = "Dr.Dazzle Booking" . $todaydate ;
-$email_body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email_address\n\nlocation:\n$location\n\ncar size:\n$carsize \n\ncar plate:\n$plate\n\nservices:\n$services";
+$email_body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nPhone: $phone\n\nEmail: $email_address\n\nlocation:\n$location\n\ncar size:\n$carsize \n\ncar plate:\n$plate\n\nservices:\n$services";
 $headers = "From: noreply@DrDazzel.com\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
 mail($to,$email_subject,$email_body,$headers);
 echo "sent!";
