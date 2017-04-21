@@ -1,0 +1,65 @@
+
+
+
+
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<!--<script src="./js/materialize.min.js"></script>-->
+
+
+<script>
+
+var json =
+    [{"Name":"DrDazzle", "body":"I am a very simple card."},
+    {"Name":"DrDazzle2", "body":"I am a very simple card."},
+    {"Name":"DrDazzle3", "body":"I am a very simple card."}];
+
+JSON.stringify(json[1].firstName);
+
+
+
+function ggg(){
+
+
+  var count = Object.keys(json).length;
+
+  var container = document.getElementById('mybody');
+
+  for(var i=0 ; i < count ; i++){
+
+    container.innerHTML += '<div class="row"  style="font-size: 40px;">'+
+            '<div class="col s12 m6" style="width:100%">'+
+              '<div class="card blue-grey darken-1">'+
+                '<div class="card-content white-text"     style="padding-top: 5%;">'+
+                  '<span class="card-title" style="font-size: 65px;">' + json[i].Name +'</span>'+
+                  '<p style="padding-top: 5%;">'+ json[i].body +'</p>'+
+                '</div>'+
+                '<div class="card-action">'+
+                  '<a href="#" onclick="start()">Select</a>'+
+                  '<a href="#">This is a link</a>'+
+                '</div>'+
+              '</div>'+
+            '</div>'+
+          '</div>';
+
+  }
+
+
+
+}
+
+
+function start(){
+  window.location.href = "saved_resource.html";
+
+}
+
+</script>
+
+<body id="mybody"  onload="ggg()">
+
+
+</body>

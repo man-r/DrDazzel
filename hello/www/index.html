@@ -9,7 +9,7 @@
 
 body {
 
-background-image:url(./Pics/maxresdefault.jpg);
+background-image:url(./Pics/buffer22.png);
 background-position: center;
 background-size: cover;
 
@@ -18,19 +18,22 @@ background-size: cover;
 
 #startBtnDiv {
   position: absolute;
-  width: 300px;
-  height: 200px;
-  z-index: 15;
-  top: 80%;
-  left: 50%;
-  margin: -100px 0 0 -150px;
+    width: 300px;
+    height: 200px;
+    z-index: 15;
+    top: 80%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
 
 }
 #CoverDiv {
   position: absolute;
-  top: 20%;
-  width: 100%;
-  margin: auto;
+    width: 56%;
+    height: 200px;
+    z-index: 15;
+    top: 42%;
+    left: 68%;
+    margin: -100px 0 0 -253px;
 }
 
 #startBtn {
@@ -47,10 +50,18 @@ width: 100%;
 
 </style>
 <script>
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+  xmlhttp.open("POST", "http://home-like.appengine.flow.ch/dazzle.php");
+  xmlhttp.setRequestHeader("Content-Type", "application/json");
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        console.log(xmlhttp.responseText)
+    }
+}
+  xmlhttp.send(JSON.stringify({name:"John Rambo", time:"2pm"}));
 
 function start(){
-  window.location.href = "Page2.html";
-
+  window.location.href = "card.html";
 
 }
 
@@ -59,9 +70,9 @@ function start(){
 <body >
 
   <Div id="CoverDiv">
-    <img src="./img/logo-En.png" style="width:100%"></img>
-    <img src="./img/sonax.png" style="width:30%"></img>
+    <img src="./img/logo.png" style="width:100%"></img>
   </div>
+
 <Div id="startBtnDiv">
   <button class="btn btn-danger" id="startBtn" type="button" onclick="start()" style="zoom:3;">Find Nearby</button>
 </div>
